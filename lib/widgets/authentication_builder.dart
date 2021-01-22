@@ -1,9 +1,8 @@
-import 'package:MatricaZadatak/widgets/dash_board_builder.dart';
 import 'package:flutter/material.dart';
 
 import '../services/authentication_service.dart';
 import '../services/data_provider_service.dart';
-import './data_provider.dart';
+import '../screens/dash_board_builder.dart';
 
 import 'package:provider/provider.dart';
 

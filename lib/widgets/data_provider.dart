@@ -1,26 +1,40 @@
-import 'package:MatricaZadatak/services/data_provider_service.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/dashboard.dart';
+import '../widgets/dashboard_section.dart';
+import '../models/agent.dart';
+import '../services/data_provider_service.dart';
 
 import 'package:provider/provider.dart';
 
 class DataProvider extends StatelessWidget {
-  const DataProvider({Key key}) : super(key: key);
+  final bool isUpper;
+  const DataProvider({Key key, @required this.isUpper}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final DateTime _startDate = Provider.of<DateTime>(context, listen: false);
     return FutureBuilder(
-      future: Provider.of<DataProviderService>(context, listen: false)
-          .getUpperData(),
+      future: Provider.of<DataProviderService>(context, listen: false).getData(
+        _startDate,
+        isUpper,
+      ),
+      //isUpper
+      // ? Provider.of<DataProviderService>(context, listen: false)
+      //     .getUpperData(Provider.of<DateTime>(context, listen: false))
+      // : Provider.of<DataProviderService>(context, listen: false)
+      //     .getLowerData(Provider.of<DateTime>(context, listen: false)),
       builder: (ctx, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          print("waiting upper data :(");
+          print("waiting  data :(");
           return Center(
             child: CircularProgressIndicator(),
           );
         } else {
-          return DashBoard();
+          final List<Agent> _agentsList = snapshot.data as List<Agent>;
+          return DashBoardSection(
+            isUpper: isUpper,
+            agentsToBeDisplayed: _agentsList,
+          );
         }
       },
     );

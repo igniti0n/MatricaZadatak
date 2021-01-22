@@ -16,6 +16,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: TextTheme(
+          headline1: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 9,
+          ),
+          bodyText1: TextStyle(
+            //fontWeight: FontWeight.bold,
+            fontSize: 7,
+            color: Colors.grey[800],
+          ),
+        ),
       ),
       home: AuthenticationBuilder(),
     );
