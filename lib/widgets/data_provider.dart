@@ -18,14 +18,8 @@ class DataProvider extends StatelessWidget {
         _startDate,
         isUpper,
       ),
-      //isUpper
-      // ? Provider.of<DataProviderService>(context, listen: false)
-      //     .getUpperData(Provider.of<DateTime>(context, listen: false))
-      // : Provider.of<DataProviderService>(context, listen: false)
-      //     .getLowerData(Provider.of<DateTime>(context, listen: false)),
       builder: (ctx, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          print("waiting  data :(");
           return Center(
             child: CircularProgressIndicator(),
           );

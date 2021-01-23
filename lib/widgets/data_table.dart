@@ -8,7 +8,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 //12 REDOVA +1 UKUPNO, 8 REDOVA + 1 UKUPNO
 
-class DataTableWidget extends StatelessWidget {
+class DataTableWidget extends StatefulWidget {
   final List<Agent> agentsForThisDate;
 
   final AutoSizeGroup textGroup;
@@ -20,9 +20,32 @@ class DataTableWidget extends StatelessWidget {
     @required this.textGroup,
   }) : super(key: key);
 
+  @override
+  _DataTableWidgetState createState() => _DataTableWidgetState();
+}
+
+class _DataTableWidgetState extends State<DataTableWidget>
+    with SingleTickerProviderStateMixin {
   final List<String> _emptyData = ['-', '-', '-', '-'];
 
   List<Widget> _tableRows = new List<Widget>();
+  AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = new AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   Widget _createRow(ThemeData theme, List<String> text, double spacing,
       {bool isFinal = false}) {
@@ -35,7 +58,7 @@ class DataTableWidget extends StatelessWidget {
                 ? theme.textTheme.bodyText1
                     .copyWith(fontWeight: FontWeight.w900)
                 : theme.textTheme.bodyText1,
-            group: textGroup,
+            group: widget.textGroup,
             textAlign: TextAlign.center,
             minFontSize: 3,
           ),
@@ -150,89 +173,96 @@ class DataTableWidget extends StatelessWidget {
       ),
     ]);
 
-    final int _rowDataLimit = isUpper ? 12 : 8;
+    final int _rowDataLimit = widget.isUpper ? 12 : 8;
     List<String> _agentData;
     List<String> _ukupno = [
       'UKUPNO',
     ];
 
-    return LayoutBuilder(
-      builder: (ctx, constraints) {
-        int _sumAgreed = 0, _sumSales = 0, _sumLeads = 0;
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (ctx, child) => Opacity(
+        opacity: _animationController.value,
+        child: child,
+      ),
+      child: LayoutBuilder(
+        builder: (ctx, constraints) {
+          int _sumAgreed = 0, _sumSales = 0, _sumLeads = 0;
 
-        agentsForThisDate.forEach((agent) {
-          _sumAgreed += agent.agreedAppointments;
-          _sumSales += agent.sales;
-          _sumLeads += agent.leads;
-        });
+          widget.agentsForThisDate.forEach((agent) {
+            _sumAgreed += agent.agreedAppointments;
+            _sumSales += agent.sales;
+            _sumLeads += agent.leads;
+          });
 
-        _ukupno.add(_sumAgreed.toString());
-        _ukupno.add(_sumSales.toString());
-        _ukupno.add(_sumLeads.toString());
+          _ukupno.add(_sumAgreed.toString());
+          _ukupno.add(_sumSales.toString());
+          _ukupno.add(_sumLeads.toString());
 
-        for (int i = 0; i < _rowDataLimit; i++) {
-          if (i < agentsForThisDate.length) {
-            _agentData = [
-              ' ${agentsForThisDate[i].name}',
-              '${agentsForThisDate[i].agreedAppointments}',
-              '${agentsForThisDate[i].sales}',
-              '${agentsForThisDate[i].leads}',
-            ];
-            _tableRows.add(
-                _createRow(_theme, _agentData, constraints.maxWidth * 0.1));
-          } else {
-            _tableRows.add(
-                _createRow(_theme, _emptyData, constraints.maxWidth * 0.1));
+          for (int i = 0; i < _rowDataLimit; i++) {
+            if (i < widget.agentsForThisDate.length) {
+              _agentData = [
+                ' ${widget.agentsForThisDate[i].name}',
+                '${widget.agentsForThisDate[i].agreedAppointments}',
+                '${widget.agentsForThisDate[i].sales}',
+                '${widget.agentsForThisDate[i].leads}',
+              ];
+              _tableRows.add(
+                  _createRow(_theme, _agentData, constraints.maxWidth * 0.1));
+            } else {
+              _tableRows.add(
+                  _createRow(_theme, _emptyData, constraints.maxWidth * 0.1));
+            }
           }
-        }
 
-        _tableRows.add(
-          _createRow(_theme, _ukupno, constraints.maxWidth * 0.1,
-              isFinal: true),
-        );
+          _tableRows.add(
+            _createRow(_theme, _ukupno, constraints.maxWidth * 0.1,
+                isFinal: true),
+          );
 
-        log(constraints.maxHeight.toString());
-        log(constraints.maxWidth.toString());
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+          log(constraints.maxHeight.toString());
+          log(constraints.maxWidth.toString());
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    _headlineText,
+                    ..._tableRows,
+                    if (!widget.isUpper)
+                      Expanded(
+                        child: Container(),
+                      ),
+                    if (!widget.isUpper)
+                      Expanded(
+                        child: Container(),
+                      ),
+                  ],
+                ),
+              ),
+              Column(
                 children: [
-                  _headlineText,
-                  ..._tableRows,
-                  if (!isUpper)
-                    Expanded(
-                      child: Container(),
-                    ),
-                  if (!isUpper)
-                    Expanded(
-                      child: Container(),
-                    ),
+                  Container(
+                    height: 10,
+                  ),
+                  Container(
+                    width: 2,
+                    height: widget.isUpper
+                        ? constraints.maxHeight * 0.9
+                        : constraints.maxHeight * 0.7,
+                    color: Colors.grey[700],
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
                 ],
               ),
-            ),
-            Column(
-              children: [
-                Container(
-                  height: 10,
-                ),
-                Container(
-                  width: 2,
-                  height: isUpper
-                      ? constraints.maxHeight * 0.9
-                      : constraints.maxHeight * 0.7,
-                  color: Colors.grey[700],
-                ),
-                Expanded(
-                  child: Container(),
-                ),
-              ],
-            ),
-          ],
-        );
-      },
+            ],
+          );
+        },
+      ),
     );
   }
 }

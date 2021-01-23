@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 import '../models/agent.dart';
@@ -25,7 +23,7 @@ class DashBoardSection extends StatelessWidget {
     final AutoSizeGroup _textSizeGroup = new AutoSizeGroup();
 
     return LayoutBuilder(builder: (ctx, constraint) {
-      log('SECTION CONSTRAINT:' + constraint.maxHeight.toString());
+      // log('SECTION CONSTRAINT:' + constraint.maxHeight.toString());
       return SizedBox(
         height: constraint.maxHeight,
         width: constraint.maxWidth,

@@ -1,6 +1,5 @@
+import 'package:MatricaZadatak/widgets/into_builder.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/dashboard.dart';
 
 import 'package:provider/provider.dart';
 
@@ -28,12 +27,6 @@ class _DashBoardBuilderState extends State<DashBoardBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    // final MediaQueryData _mediaData = MediaQuery.of(context);
-    // final double _availableHeight = _mediaData.size.height -
-    //     _mediaData.padding.bottom -
-    //     _mediaData.padding.top;
-    // final double _availableWidth = _mediaData.size.width;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -43,6 +36,7 @@ class _DashBoardBuilderState extends State<DashBoardBuilder> {
             icon: Icon(Icons.arrow_back_ios),
             color: Colors.white,
             onPressed: _onBackwards,
+            focusColor: Colors.red,
           ),
           IconButton(
             icon: Icon(
@@ -56,7 +50,7 @@ class _DashBoardBuilderState extends State<DashBoardBuilder> {
       backgroundColor: Colors.grey[300],
       body: Provider.value(
         value: startDate,
-        builder: (ctx, _) => DashBoard(),
+        builder: (ctx, _) => IntroBuilder(),
       ),
     );
   }
