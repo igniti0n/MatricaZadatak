@@ -25,7 +25,7 @@ class AuthenticationBuilder extends StatelessWidget {
           future:
               Provider.of<AuthenticationService>(ctx, listen: false).login(),
           builder: (ctx, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
+            if (snapshot.connectionState != ConnectionState.done) {
               return Scaffold(
                 backgroundColor: Colors.grey[200],
                 body: Center(

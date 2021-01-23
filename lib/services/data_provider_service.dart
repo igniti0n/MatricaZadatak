@@ -9,13 +9,14 @@ import 'package:http/http.dart' as http;
 class DataProviderService {
   Future<List<Agent>> getData(DateTime startDate, bool isUpper) async {
     try {
-      final DateTime _endDate = startDate.add(Duration(days: 4));
+      final DateTime _endDateUpper = startDate.add(Duration(days: 4));
+      final DateTime _endDateLower = startDate.add(Duration(days: 8));
 
       final _upperDataLink =
-          "https://matrica.hr:5700/api/AndroidTV/Upper?startDate=${startDate.year}-${startDate.month}-${startDate.day}&endDate=${_endDate.year}-${_endDate.month}-${_endDate.day}";
+          "https://matrica.hr:5700/api/AndroidTV/Upper?startDate=${startDate.year}-${startDate.month}-${startDate.day}&endDate=${_endDateUpper.year}-${_endDateUpper.month}-${_endDateUpper.day}";
 
       final _lowerDataLink =
-          "https://matrica.hr:5700/api/AndroidTV/Lower?startDate=${startDate.year}-${startDate.month}-${startDate.day}&endDate=${_endDate.year}-${_endDate.month}-${_endDate.day}";
+          "https://matrica.hr:5700/api/AndroidTV/Lower?startDate=${startDate.year}-${startDate.month}-${startDate.day}&endDate=${_endDateLower.year}-${_endDateLower.month}-${_endDateLower.day}";
 
       final String _token = await SharedPreferencesService.getToken();
       print("TOKEN BURAZ: $_token");
@@ -42,6 +43,7 @@ class DataProviderService {
       return _agents;
     } catch (error) {
       print(error.toString());
+      return null;
     }
   }
 

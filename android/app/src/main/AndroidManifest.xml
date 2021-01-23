@@ -8,7 +8,6 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="MatricaZadatak"
-        android:banner="@drawable/banner"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -28,11 +28,11 @@ class _DashBoardBuilderState extends State<DashBoardBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData _mediaData = MediaQuery.of(context);
-    final double _availableHeight = _mediaData.size.height -
-        _mediaData.padding.bottom -
-        _mediaData.padding.top;
-    final double _availableWidth = _mediaData.size.width;
+    // final MediaQueryData _mediaData = MediaQuery.of(context);
+    // final double _availableHeight = _mediaData.size.height -
+    //     _mediaData.padding.bottom -
+    //     _mediaData.padding.top;
+    // final double _availableWidth = _mediaData.size.width;
 
     return Scaffold(
       appBar: AppBar(
