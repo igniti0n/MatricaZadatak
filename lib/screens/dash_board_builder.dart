@@ -36,9 +36,10 @@ class _DashBoardBuilderState extends State<DashBoardBuilder> {
             icon: Icon(Icons.arrow_back_ios),
             color: Colors.white,
             onPressed: _onBackwards,
-            focusColor: Colors.red,
+            focusColor: Colors.green[900],
           ),
           IconButton(
+            focusColor: Colors.green[900],
             icon: Icon(
               Icons.arrow_forward_ios,
               color: Colors.white,
