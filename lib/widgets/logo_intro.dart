@@ -13,6 +13,7 @@ class _LogoIntroState extends State<LogoIntro>
   Widget build(BuildContext context) {
     return Center(
       child: AnimatedOpacity(
+        opacity: 1,
         duration: Duration(seconds: 2),
         curve: Curves.easeInCubic,
         child: SizedBox(
