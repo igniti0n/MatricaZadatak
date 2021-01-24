@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:MatricaZadatak/screens/dash_board_builder.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/dashboard_section.dart';
@@ -22,13 +23,11 @@ class _DataProviderState extends State<DataProvider> {
 
   @override
   void initState() {
-    super.initState();
-    print("tajmer pocinje");
     _timer = new Timer(Duration(seconds: 2), () {
-      setState(() {
-        print("TAJMER SE IZVRSIO");
-      });
+      if (mounted) setState(() {});
+      print("timer buraz");
     });
+    super.initState();
   }
 
   @override
@@ -44,9 +43,8 @@ class _DataProviderState extends State<DataProvider> {
 
   @override
   Widget build(BuildContext context) {
-    //final DateTime _startDate = Provider.of<DateTime>(context, listen: true);
-    return Consumer<DateNotifier>(
-      builder: (ctx, dateNotifier, _) => FutureBuilder(
+    return Consumer<DateNotifier>(builder: (ctx, dateNotifier, _) {
+      return FutureBuilder(
         future:
             Provider.of<DataProviderService>(context, listen: false).getData(
           dateNotifier.getDate,
@@ -55,10 +53,14 @@ class _DataProviderState extends State<DataProvider> {
         builder: (ctx, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child:
-                  _timer.isActive ? Container() : CircularProgressIndicator(),
+              child: _timer.isActive
+                  ? Container()
+                  : CircularProgressIndicator(
+                      strokeWidth: 1,
+                    ),
             );
           } else if (snapshot.hasError) {
+            _timer.cancel();
             return Center(
               child: Text(
                   "Error while loading data.\n${snapshot.error.toString()}"),
@@ -73,7 +75,7 @@ class _DataProviderState extends State<DataProvider> {
             );
           }
         },
-      ),
-    );
+      );
+    });
   }
 }

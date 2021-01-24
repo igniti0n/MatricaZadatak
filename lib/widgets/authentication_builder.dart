@@ -36,8 +36,11 @@ class _AuthenticationBuilderState extends State<AuthenticationBuilder> {
           return Scaffold(
             backgroundColor: Colors.grey[200],
             body: Center(
-              child:
-                  _timer.isActive ? Container() : CircularProgressIndicator(),
+              child: _timer.isActive
+                  ? Container()
+                  : CircularProgressIndicator(
+                      strokeWidth: 1,
+                    ),
             ),
           );
         } else {

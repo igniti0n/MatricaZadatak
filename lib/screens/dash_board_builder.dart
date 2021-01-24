@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-class DashBoardBuilder extends StatefulWidget {
-  const DashBoardBuilder({Key key}) : super(key: key);
+class DashBoardBuilder extends StatelessWidget {
+  DashBoardBuilder({Key key}) : super(key: key);
 
-  @override
-  _DashBoardBuilderState createState() => _DashBoardBuilderState();
-}
-
-class _DashBoardBuilderState extends State<DashBoardBuilder> {
   DateNotifier date = new DateNotifier();
 
   void _onForward() {
