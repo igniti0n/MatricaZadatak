@@ -24,7 +24,6 @@ class DataProviderService {
         isUpper ? _upperDataLink : _lowerDataLink,
         headers: {
           'Content-type': 'application/x-www-form-urlencoded',
-          'www-authenticate': _token,
           "Authorization": "Bearer $_token",
         },
       );
@@ -58,7 +57,7 @@ class DataProviderService {
   //       _upperDataLink,
   //       headers: {
   //         'Content-type': 'application/x-www-form-urlencoded',
-  //         'www-authenticate': _token,
+  //
   //         "Authorization": "Bearer $_token",
   //         // 'Authorization': '',
   //       },
@@ -92,7 +91,7 @@ class DataProviderService {
   //       _lowerDataLink,
   //       headers: {
   //         'Content-type': 'application/x-www-form-urlencoded',
-  //         'www-authenticate': _token,
+  //
   //         "Authorization": "Bearer $_token",
   //       },
   //     );

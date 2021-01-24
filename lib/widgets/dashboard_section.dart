@@ -9,17 +9,19 @@ import 'package:intl/intl.dart';
 
 class DashBoardSection extends StatelessWidget {
   final bool isUpper;
+  final DateTime startDate;
   final List<Agent> agentsToBeDisplayed;
   const DashBoardSection({
     Key key,
     this.isUpper = true,
+    @required this.startDate,
     @required this.agentsToBeDisplayed,
   })  : assert(agentsToBeDisplayed != null, "Provided Agents can't be null"),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final DateTime _startDate = Provider.of<DateTime>(context, listen: false);
+    // final DateTime _startDate = Provider.of<DateTime>(context, listen: false);
     final AutoSizeGroup _textSizeGroup = new AutoSizeGroup();
 
     return LayoutBuilder(builder: (ctx, constraint) {
@@ -52,7 +54,7 @@ class DashBoardSection extends StatelessWidget {
                 children: [
                   Expanded(
                     child: AutoSizeText(
-                      'PONEDJELJAK ${DateFormat('d-M').format(_startDate)}',
+                      'PONEDJELJAK ${DateFormat('d-M').format(startDate)}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -63,7 +65,7 @@ class DashBoardSection extends StatelessWidget {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      'UTORAK ${DateFormat('d-M').format(_startDate.add(Duration(days: 1)))}',
+                      'UTORAK ${DateFormat('d-M').format(startDate.add(Duration(days: 1)))}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -74,7 +76,7 @@ class DashBoardSection extends StatelessWidget {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      'SRIJEDA ${DateFormat('d-M').format(_startDate.add(Duration(days: 2)))}',
+                      'SRIJEDA ${DateFormat('d-M').format(startDate.add(Duration(days: 2)))}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -85,7 +87,7 @@ class DashBoardSection extends StatelessWidget {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      'ČETVRTAK ${DateFormat('d-M').format(_startDate.add(Duration(days: 3)))}',
+                      'ČETVRTAK ${DateFormat('d-M').format(startDate.add(Duration(days: 3)))}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -96,7 +98,7 @@ class DashBoardSection extends StatelessWidget {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      'PETAK ${DateFormat('d-M').format(_startDate.add(Duration(days: 4)))}',
+                      'PETAK ${DateFormat('d-M').format(startDate.add(Duration(days: 4)))}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -109,7 +111,7 @@ class DashBoardSection extends StatelessWidget {
                     child: AutoSizeText(
                       isUpper
                           ? 'UKUPNO'
-                          : 'PONEDJELJAK ${DateFormat('d-M').format(_startDate.add(Duration(days: 7)))}',
+                          : 'PONEDJELJAK ${DateFormat('d-M').format(startDate.add(Duration(days: 7)))}',
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
@@ -134,7 +136,7 @@ class DashBoardSection extends StatelessWidget {
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
                               agent.date.day ==
-                              _startDate.add(Duration(days: 0)).day)
+                              startDate.add(Duration(days: 0)).day)
                           .toList()
                             ..sort((a, b) {
                               return a.name.codeUnits.first
@@ -149,7 +151,7 @@ class DashBoardSection extends StatelessWidget {
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
                               agent.date.day ==
-                              _startDate.add(Duration(days: 1)).day)
+                              startDate.add(Duration(days: 1)).day)
                           .toList()
                             ..sort((a, b) {
                               return a.name.codeUnits.first
@@ -164,7 +166,7 @@ class DashBoardSection extends StatelessWidget {
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
                               agent.date.day ==
-                              _startDate.add(Duration(days: 2)).day)
+                              startDate.add(Duration(days: 2)).day)
                           .toList()
                             ..sort((a, b) {
                               return a.name.codeUnits.first
@@ -179,7 +181,7 @@ class DashBoardSection extends StatelessWidget {
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
                               agent.date.day ==
-                              _startDate.add(Duration(days: 3)).day)
+                              startDate.add(Duration(days: 3)).day)
                           .toList()
                             ..sort((a, b) {
                               return a.name.codeUnits.first
@@ -194,7 +196,7 @@ class DashBoardSection extends StatelessWidget {
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
                               agent.date.day ==
-                              _startDate.add(Duration(days: 4)).day)
+                              startDate.add(Duration(days: 4)).day)
                           .toList()
                             ..sort((a, b) {
                               return a.name.codeUnits.first
@@ -211,7 +213,7 @@ class DashBoardSection extends StatelessWidget {
                           : agentsToBeDisplayed
                               .where((agent) =>
                                   agent.date.day ==
-                                  _startDate.add(Duration(days: 7)).day)
+                                  startDate.add(Duration(days: 7)).day)
                               .toList()
                         ..sort((a, b) {
                           return a.name.codeUnits.first

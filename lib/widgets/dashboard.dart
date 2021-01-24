@@ -2,14 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/data_provider.dart';
 
-class DashBoard extends StatefulWidget {
-  const DashBoard({Key key}) : super(key: key);
-
-  @override
-  _DashBoardState createState() => _DashBoardState();
-}
-
-class _DashBoardState extends State<DashBoard> {
+class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _mediaData = MediaQuery.of(context);

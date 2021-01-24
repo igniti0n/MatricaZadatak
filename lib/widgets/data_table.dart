@@ -220,8 +220,8 @@ class _DataTableWidgetState extends State<DataTableWidget>
                 isFinal: true),
           );
 
-          log(constraints.maxHeight.toString());
-          log(constraints.maxWidth.toString());
+          // log(constraints.maxHeight.toString());
+          // log(constraints.maxWidth.toString());
           return Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

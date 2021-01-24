@@ -12,6 +12,7 @@ class IntroBuilder extends StatefulWidget {
 class _IntroBuilderState extends State<IntroBuilder>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
+
   bool isLoaded = false;
 
   @override

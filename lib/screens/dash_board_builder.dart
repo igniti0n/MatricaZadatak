@@ -11,18 +11,14 @@ class DashBoardBuilder extends StatefulWidget {
 }
 
 class _DashBoardBuilderState extends State<DashBoardBuilder> {
-  DateTime startDate = DateTime(2020, 12, 21);
+  DateNotifier date = new DateNotifier();
 
   void _onForward() {
-    setState(() {
-      startDate = startDate.add(Duration(days: 7));
-    });
+    date.increaseStartDate();
   }
 
   void _onBackwards() {
-    setState(() {
-      startDate = startDate.subtract(Duration(days: 7));
-    });
+    date.decreaseStartDate();
   }
 
   @override
@@ -49,10 +45,28 @@ class _DashBoardBuilderState extends State<DashBoardBuilder> {
         ],
       ),
       backgroundColor: Colors.grey[300],
-      body: Provider.value(
-        value: startDate,
+      body: ChangeNotifierProvider(
+        create: (ctx) => date,
         builder: (ctx, _) => IntroBuilder(),
       ),
     );
+  }
+}
+
+class DateNotifier extends ChangeNotifier {
+  //DateNotifier _notifier;
+  DateTime _startDate = DateTime(2020, 12, 21);
+  // DateNotifier._();
+
+  DateTime get getDate => DateTime.parse(_startDate.toIso8601String());
+
+  void increaseStartDate() {
+    _startDate = _startDate.add(Duration(days: 7));
+    notifyListeners();
+  }
+
+  void decreaseStartDate() {
+    _startDate = _startDate.subtract(Duration(days: 7));
+    notifyListeners();
   }
 }
