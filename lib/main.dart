@@ -16,8 +16,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Shortcuts(
       shortcuts: <LogicalKeySet, Intent>{
-        LogicalKeySet(LogicalKeyboardKey.gameButtonSelect):
-            const ActivateIntent(),
+        LogicalKeySet(
+            LogicalKeyboardKey.select,
+            LogicalKeyboardKey.gameButtonSelect,
+            LogicalKeyboardKey.enter): const ActivateIntent(),
       },
       child: Provider(
         create: (ctx) => InternetService(),
