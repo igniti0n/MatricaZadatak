@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:MatricaZadatak/screens/dash_board_builder.dart';
 import 'package:flutter/material.dart';
 
-import '../services/authentication_service.dart';
-import '../services/data_provider_service.dart';
+import '../../presentation/screens/dash_board_builder.dart';
+import '../../data/services/authentication_service.dart';
 
 import 'package:provider/provider.dart';
 
@@ -32,7 +31,8 @@ class _AuthenticationBuilderState extends State<AuthenticationBuilder> {
       future:
           Provider.of<AuthenticationService>(context, listen: false).login(),
       builder: (ctx, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == ConnectionState.waiting ||
+            snapshot.hasError) {
           return Scaffold(
             backgroundColor: Colors.grey[200],
             body: Center(
@@ -45,6 +45,7 @@ class _AuthenticationBuilderState extends State<AuthenticationBuilder> {
           );
         } else {
           _timer.cancel();
+
           return DashBoardBuilder();
         }
       },

@@ -6,8 +6,6 @@ import './shared_prefs_service.dart';
 const String _authenticationLink =
     "https://matrica.hr:5700/api/auth/create_token";
 
-//TODO: POKUSAJ PRVO SE PONOVO LOGIRAT AKO IMA VEC TOKEN
-
 class AuthenticationService {
   Future<void> login() async {
     try {
@@ -23,15 +21,11 @@ class AuthenticationService {
 
       await SharedPreferencesService.saveToken(
           json.decode(_response.body)['Token']);
-      print("SPREMLJENI TOKEN::::::::");
-      final String _token = await SharedPreferencesService.getToken();
-      print(_token);
-      print(":::::::::::::::::::::::");
 
-      print("RESPONSE BODY: ${_response.body}");
+      final String _token = await SharedPreferencesService.getToken();
     } catch (error) {
-      print("NEKI ERROR");
       print(error.toString());
+      throw error;
     }
   }
 }

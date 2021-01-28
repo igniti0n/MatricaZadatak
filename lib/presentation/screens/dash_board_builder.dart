@@ -1,12 +1,14 @@
-import 'package:MatricaZadatak/widgets/into_builder.dart';
 import 'package:flutter/material.dart';
+
+import '../../logic/date_provider.dart';
+import '../../presentation/widgets/into_builder.dart';
 
 import 'package:provider/provider.dart';
 
 class DashBoardBuilder extends StatelessWidget {
   DashBoardBuilder({Key key}) : super(key: key);
 
-  DateNotifier date = new DateNotifier();
+  final DateNotifier date = new DateNotifier();
 
   void _onForward() {
     date.increaseStartDate();
@@ -45,23 +47,5 @@ class DashBoardBuilder extends StatelessWidget {
         builder: (ctx, _) => IntroBuilder(),
       ),
     );
-  }
-}
-
-class DateNotifier extends ChangeNotifier {
-  //DateNotifier _notifier;
-  DateTime _startDate = DateTime(2020, 12, 21);
-  // DateNotifier._();
-
-  DateTime get getDate => DateTime.parse(_startDate.toIso8601String());
-
-  void increaseStartDate() {
-    _startDate = _startDate.add(Duration(days: 7));
-    notifyListeners();
-  }
-
-  void decreaseStartDate() {
-    _startDate = _startDate.subtract(Duration(days: 7));
-    notifyListeners();
   }
 }

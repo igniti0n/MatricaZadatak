@@ -1,8 +1,6 @@
-import 'dart:developer' show log;
-
 import 'package:flutter/material.dart';
 
-import '../models/agent.dart';
+import '../../data/models/agent.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -50,77 +48,73 @@ class _DataTableWidgetState extends State<DataTableWidget>
   Widget _createRow(ThemeData theme, List<String> text, double spacing,
       {bool isFinal = false}) {
     return Expanded(
-      child: Row(children: [
-        Expanded(
-          child: AutoSizeText(
-            text[0],
-            style: isFinal
-                ? theme.textTheme.bodyText1
-                    .copyWith(fontWeight: FontWeight.w900)
-                : theme.textTheme.bodyText1,
-            group: widget.textGroup,
-            textAlign: TextAlign.center,
-            minFontSize: 1,
+      child: Row(
+        children: [
+          Expanded(
+            child: AutoSizeText(
+              text[0],
+              style: isFinal
+                  ? theme.textTheme.bodyText1
+                      .copyWith(fontWeight: FontWeight.w900)
+                  : theme.textTheme.bodyText1,
+              group: widget.textGroup,
+              textAlign: TextAlign.center,
+              minFontSize: 1,
+            ),
           ),
-        ),
-
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 5),
+          Expanded(
             child: Container(
-              color: isFinal ? Colors.green : Colors.blue[800],
-              height: double.infinity,
-              // width: double.minPositive,
-              alignment: Alignment.center,
-              child: AutoSizeText(
-                text[1],
-                style: theme.textTheme.bodyText1,
-                textAlign: TextAlign.center,
-                minFontSize: 1,
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: Container(
+                color: isFinal ? Colors.green : Colors.blue[800],
+                height: double.infinity,
+                // width: double.minPositive,
+                alignment: Alignment.center,
+                child: AutoSizeText(
+                  text[1],
+                  style: theme.textTheme.bodyText1,
+                  textAlign: TextAlign.center,
+                  minFontSize: 1,
+                ),
               ),
             ),
           ),
-        ),
-
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 5),
+          Expanded(
             child: Container(
-              color: isFinal ? Colors.green : Colors.blue,
-              height: double.infinity,
-              // width: double.minPositive,
-              alignment: Alignment.center,
-              child: AutoSizeText(
-                text[2],
-                style: theme.textTheme.bodyText1,
-                textAlign: TextAlign.center,
-                minFontSize: 1,
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: Container(
+                color: isFinal ? Colors.green : Colors.blue,
+                height: double.infinity,
+                // width: double.minPositive,
+                alignment: Alignment.center,
+                child: AutoSizeText(
+                  text[2],
+                  style: theme.textTheme.bodyText1,
+                  textAlign: TextAlign.center,
+                  minFontSize: 1,
+                ),
               ),
             ),
           ),
-        ),
-        // Expanded(child: Container()),
-        // SizedBox(
-        //   width: spacing,
-        // ),
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 5),
+          Expanded(
             child: Container(
-              color: isFinal ? Colors.green : Colors.blue,
-              height: double.infinity,
-              // width: double.minPositive,
-              alignment: Alignment.center,
-              child: AutoSizeText(
-                text[3],
-                style: theme.textTheme.bodyText1,
-                textAlign: TextAlign.center,
-                minFontSize: 1,
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: Container(
+                color: isFinal ? Colors.green : Colors.blue,
+                height: double.infinity,
+                // width: double.minPositive,
+                alignment: Alignment.center,
+                child: AutoSizeText(
+                  text[3],
+                  style: theme.textTheme.bodyText1,
+                  textAlign: TextAlign.center,
+                  minFontSize: 1,
+                ),
               ),
             ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 

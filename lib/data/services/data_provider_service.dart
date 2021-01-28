@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import '../models/agent.dart';
 
-import 'package:MatricaZadatak/services/shared_prefs_service.dart';
+import './shared_prefs_service.dart';
 import 'package:http/http.dart' as http;
 
 class DataProviderService {
@@ -39,7 +38,7 @@ class DataProviderService {
       return _agents;
     } catch (error) {
       print(error.toString());
-      return null;
+      throw error;
     }
   }
 

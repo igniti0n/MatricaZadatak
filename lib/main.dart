@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import './widgets/authentication_builder.dart';
-import './services/authentication_service.dart';
-import './services/data_provider_service.dart';
+import './presentation/widgets/authentication_builder.dart';
+import './data/services/authentication_service.dart';
+import './data/services/data_provider_service.dart';
 
 import 'package:provider/provider.dart';
 

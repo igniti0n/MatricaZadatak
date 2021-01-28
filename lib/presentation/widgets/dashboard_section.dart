@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../models/agent.dart';
+import '../../data/models/agent.dart';
 import '../widgets/data_table.dart';
 
-import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
 
