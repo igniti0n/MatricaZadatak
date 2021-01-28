@@ -21,7 +21,6 @@ class DashBoardSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final DateTime _startDate = Provider.of<DateTime>(context, listen: false);
     final AutoSizeGroup _textSizeGroup = new AutoSizeGroup();
 
     return LayoutBuilder(builder: (ctx, constraint) {
@@ -31,9 +30,8 @@ class DashBoardSection extends StatelessWidget {
         width: constraint.maxWidth,
         child: Column(
           children: [
-            SizedBox(
-              height: constraint.maxHeight * 0.05,
-              width: constraint.maxWidth,
+            Flexible(
+              flex: 1,
               child: AutoSizeText(
                 isUpper
                     ? 'SASTANCI I PRODAJE PO AGENTU CC (tjedan po tijedan i suma za mijesec)'
@@ -46,11 +44,9 @@ class DashBoardSection extends StatelessWidget {
                     .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(
-              height: constraint.maxHeight * 0.05,
-              width: constraint.maxWidth,
+            Flexible(
+              flex: 1,
               child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
                     child: AutoSizeText(
@@ -123,9 +119,10 @@ class DashBoardSection extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: constraint.maxHeight * 0.9,
-              width: constraint.maxWidth,
+            Flexible(
+              // height: constraint.maxHeight * 0.9,
+              // width: constraint.maxWidth,
+              flex: 18,
               child: Row(
                 children: [
                   //TODO: SORT AGENTS BY NAME

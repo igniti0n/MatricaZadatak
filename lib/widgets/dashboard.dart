@@ -17,7 +17,7 @@ class DashBoard extends StatelessWidget {
           height: _availableHeight * 0.53,
           width: _mediaData.size.width,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(8.0, 4.0, 0, 2),
             child: DataProvider(
               isUpper: true,
             ),
@@ -25,7 +25,7 @@ class DashBoard extends StatelessWidget {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(8.0, 4.0, 0, 4),
             child: DataProvider(
               isUpper: false,
             ),

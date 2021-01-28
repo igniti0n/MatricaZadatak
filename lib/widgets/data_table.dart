@@ -60,13 +60,10 @@ class _DataTableWidgetState extends State<DataTableWidget>
                 : theme.textTheme.bodyText1,
             group: widget.textGroup,
             textAlign: TextAlign.center,
-            minFontSize: 3,
+            minFontSize: 1,
           ),
         ),
 
-        // SizedBox(
-        //   width: spacing,
-        // ),
         Expanded(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 5),
@@ -79,14 +76,12 @@ class _DataTableWidgetState extends State<DataTableWidget>
                 text[1],
                 style: theme.textTheme.bodyText1,
                 textAlign: TextAlign.center,
-                minFontSize: 3,
+                minFontSize: 1,
               ),
             ),
           ),
         ),
-        // SizedBox(
-        //   width: spacing,
-        // ),
+
         Expanded(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 5),
@@ -99,7 +94,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
                 text[2],
                 style: theme.textTheme.bodyText1,
                 textAlign: TextAlign.center,
-                minFontSize: 3,
+                minFontSize: 1,
               ),
             ),
           ),
@@ -120,7 +115,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
                 text[3],
                 style: theme.textTheme.bodyText1,
                 textAlign: TextAlign.center,
-                minFontSize: 3,
+                minFontSize: 1,
               ),
             ),
           ),
@@ -141,7 +136,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
           style: _theme.textTheme.bodyText1
               .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
           textAlign: TextAlign.center,
-          minFontSize: 3,
+          minFontSize: 1,
         ),
       ),
       Expanded(
@@ -150,7 +145,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
           style: _theme.textTheme.bodyText1
               .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
           textAlign: TextAlign.center,
-          minFontSize: 3,
+          minFontSize: 1,
         ),
       ),
       Expanded(
@@ -159,7 +154,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
           style: _theme.textTheme.bodyText1
               .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
           textAlign: TextAlign.center,
-          minFontSize: 3,
+          minFontSize: 1,
         ),
       ),
       Expanded(
@@ -168,7 +163,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
           style: _theme.textTheme.bodyText1
               .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
           textAlign: TextAlign.center,
-          minFontSize: 2,
+          minFontSize: 1,
         ),
       ),
     ]);
