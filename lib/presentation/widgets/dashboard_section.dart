@@ -207,7 +207,7 @@ class DashBoardSection extends StatelessWidget {
                           : agentsToBeDisplayed
                               .where((agent) =>
                                   agent.date.day ==
-                                  startDate.add(Duration(days: 7)).day)
+                                  startDate.add(Duration(days: 6)).day)
                               .toList()
                         ..sort((a, b) {
                           return a.name.codeUnits.first
