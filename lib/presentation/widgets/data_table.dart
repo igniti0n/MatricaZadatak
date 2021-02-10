@@ -26,7 +26,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
     with SingleTickerProviderStateMixin {
   final List<String> _emptyData = ['-', '-', '-', '-'];
 
-  List<Widget> _tableRows = new List<Widget>();
+  List<Widget> _tableRows = [];
   AnimationController _animationController;
 
   @override

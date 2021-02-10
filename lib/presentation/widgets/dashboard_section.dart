@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../data/models/agent.dart';
 import '../widgets/data_table.dart';
@@ -124,7 +125,19 @@ class DashBoardSection extends StatelessWidget {
               flex: 18,
               child: Row(
                 children: [
-                  //TODO: SORT AGENTS BY NAME
+                  Expanded(
+                    child: DataTableWidget(
+                      textGroup: _textSizeGroup,
+                      isUpper: isUpper,
+                      agentsForThisDate: agentsToBeDisplayed
+                          .where((agent) => agent.date.day == startDate.day - 1)
+                          .toList()
+                            ..sort((a, b) {
+                              return a.name.codeUnits.first
+                                  .compareTo(b.name.codeUnits.first);
+                            }),
+                    ),
+                  ),
                   Expanded(
                     child: DataTableWidget(
                       textGroup: _textSizeGroup,
@@ -189,23 +202,8 @@ class DashBoardSection extends StatelessWidget {
                     child: DataTableWidget(
                       textGroup: _textSizeGroup,
                       isUpper: isUpper,
-                      agentsForThisDate: agentsToBeDisplayed
-                          .where((agent) =>
-                              agent.date.day ==
-                              startDate.add(Duration(days: 4)).day)
-                          .toList()
-                            ..sort((a, b) {
-                              return a.name.codeUnits.first
-                                  .compareTo(b.name.codeUnits.first);
-                            }),
-                    ),
-                  ),
-                  Expanded(
-                    child: DataTableWidget(
-                      textGroup: _textSizeGroup,
-                      isUpper: isUpper,
                       agentsForThisDate: isUpper
-                          ? []
+                          ? Provider.of<List<Agent>>(context, listen: false)
                           : agentsToBeDisplayed
                               .where((agent) =>
                                   agent.date.day ==

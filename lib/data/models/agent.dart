@@ -5,7 +5,7 @@ class Agent {
   final int sales;
   final int leads;
 
-  const Agent({
+  Agent({
     this.agreedAppointments,
     this.date,
     this.leads,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../widgets/dashboard.dart';
@@ -43,6 +45,7 @@ class _IntroBuilderState extends State<IntroBuilder>
 
   @override
   Widget build(BuildContext context) {
+    log("BUILD INTRO BUILDER");
     return isLoaded
         ? DashBoard()
         : Center(

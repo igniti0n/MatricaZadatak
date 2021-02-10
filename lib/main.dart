@@ -18,9 +18,10 @@ class MyApp extends StatelessWidget {
     return Shortcuts(
       shortcuts: <LogicalKeySet, Intent>{
         LogicalKeySet(
-            LogicalKeyboardKey.select,
-            LogicalKeyboardKey.gameButtonSelect,
-            LogicalKeyboardKey.enter): const ActivateIntent(),
+          LogicalKeyboardKey.select,
+          LogicalKeyboardKey.space,
+          LogicalKeyboardKey.enter,
+        ): const ActivateIntent(),
       },
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

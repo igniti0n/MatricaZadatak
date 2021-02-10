@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../widgets/data_provider.dart';
@@ -5,6 +7,7 @@ import '../widgets/data_provider.dart';
 class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    log("BUILD DASHBOARD ::::");
     final _mediaData = MediaQuery.of(context);
     final double _availableHeight = _mediaData.size.height -
         _mediaData.padding.top -

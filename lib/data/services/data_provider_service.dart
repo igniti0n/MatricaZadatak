@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import '../models/agent.dart';
 
@@ -12,10 +13,10 @@ class DataProviderService {
       final DateTime _endDateLower = startDate.add(Duration(days: 8));
 
       final _upperDataLink =
-          "https://matrica.hr:5700/api/AndroidTV/Upper?startDate=${startDate.year}-${startDate.month}-${startDate.day}&endDate=${_endDateUpper.year}-${_endDateUpper.month}-${_endDateUpper.day}";
+          "https://salvis.hr:4700/api/AndroidTV/Upper?startDate=${startDate.year}-${startDate.month}-${startDate.day}&endDate=${_endDateUpper.year}-${_endDateUpper.month}-${_endDateUpper.day}";
 
       final _lowerDataLink =
-          "https://matrica.hr:5700/api/AndroidTV/Lower?startDate=${startDate.year}-${startDate.month}-${startDate.day}&endDate=${_endDateLower.year}-${_endDateLower.month}-${_endDateLower.day}";
+          "https://salvis.hr:4700/api/AndroidTV/Lower?startDate=${startDate.year}-${startDate.month}-${startDate.day}&endDate=${_endDateLower.year}-${_endDateLower.month}-${_endDateLower.day}";
 
       final String _token = await SharedPreferencesService.getToken();
 

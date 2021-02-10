@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../logic/date_provider.dart';
@@ -20,6 +22,7 @@ class DashBoardBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log("BUILD DASH BOARD BUILDER ");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
