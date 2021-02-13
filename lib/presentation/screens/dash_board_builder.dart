@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:MatricaZadatak/presentation/widgets/dpad.dart';
 import 'package:flutter/material.dart';
 
 import '../../logic/date_provider.dart';
@@ -28,12 +29,15 @@ class DashBoardBuilder extends StatelessWidget {
         backgroundColor: Colors.green,
         title: Text('SalvisTV Dashboard'),
         actions: [
+          DpadWidget(child:
           IconButton(
             icon: Icon(Icons.arrow_back_ios),
             color: Colors.white,
             onPressed: _onBackwards,
             focusColor: Colors.green[900],
           ),
+          onClick: _onBackwards),
+          DpadWidget(child:
           IconButton(
             focusColor: Colors.green[900],
             icon: Icon(
@@ -42,6 +46,7 @@ class DashBoardBuilder extends StatelessWidget {
             ),
             onPressed: _onForward,
           ),
+          onClick: _onForward),
         ],
       ),
       backgroundColor: Colors.grey[300],
