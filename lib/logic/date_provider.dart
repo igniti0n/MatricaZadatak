@@ -2,11 +2,11 @@ import 'package:MatricaZadatak/data/models/agent.dart';
 import 'package:flutter/material.dart';
 
 class DateNotifier extends ChangeNotifier {
-  DateTime _startDate = DateTime.now();
+  DateTime _startDate;
   List<Agent> _mjesecnoSvi = [];
 
-  DateNotifier() {
-    _startDate = DateTime.now();
+  DateNotifier(DateTime date) {
+    _startDate = date;
     print(_startDate.toIso8601String());
     while (_startDate.weekday != 1) {
       print(_startDate.weekday);

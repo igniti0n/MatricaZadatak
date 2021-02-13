@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class DashBoardBuilder extends StatelessWidget {
   DashBoardBuilder({Key key}) : super(key: key);
 
-  final DateNotifier date = new DateNotifier();
+  final DateNotifier date = new DateNotifier(DateTime.now());
 
   void _onForward() {
     date.increaseStartDate();
