@@ -1,3 +1,4 @@
+import 'package:MatricaZadatak/data/respositories/agents_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
               fontSize: 9,
             ),
             bodyText1: TextStyle(
-              fontSize: 7,
+              fontSize: 15,
               color: Colors.grey[800],
             ),
           ),
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
               create: (ctx) => AuthenticationService(),
             ),
             Provider(
-              create: (ctx) => DataProviderService(),
+              create: (ctx) => AgentsRepository(DataProviderService()),
             ),
           ],
           builder: (ctx, _) {

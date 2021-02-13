@@ -1,3 +1,4 @@
+import 'package:MatricaZadatak/logic/date_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,19 +10,35 @@ import 'package:intl/intl.dart';
 
 class DashBoardSection extends StatelessWidget {
   final bool isUpper;
-  final DateTime startDate;
+
   final List<Agent> agentsToBeDisplayed;
-  const DashBoardSection({
+
+  DashBoardSection({
     Key key,
     this.isUpper = true,
-    @required this.startDate,
     @required this.agentsToBeDisplayed,
   })  : assert(agentsToBeDisplayed != null, "Provided Agents can't be null"),
         super(key: key);
 
+  final AutoSizeGroup _textSizeGroup = new AutoSizeGroup();
+  final AutoSizeGroup _headlineGroup = new AutoSizeGroup();
+
   @override
   Widget build(BuildContext context) {
-    final AutoSizeGroup _textSizeGroup = new AutoSizeGroup();
+    final DateTime startDate =
+        Provider.of<DateNotifier>(context, listen: false).getDate;
+
+    //služio kao reference svakoj data table, da zan koji agent fali i da ih poreda
+    final List<String> _allAgentNames = [];
+    agentsToBeDisplayed.forEach((Agent a) {
+      if (!_allAgentNames.contains(a.name)) {
+        _allAgentNames.add(a.name);
+      }
+    });
+
+    _allAgentNames.sort((a, b) {
+      return a.codeUnits.first.compareTo(b.codeUnits.first);
+    });
 
     return LayoutBuilder(builder: (ctx, constraint) {
       // log('SECTION CONSTRAINT:' + constraint.maxHeight.toString());
@@ -126,8 +143,12 @@ class DashBoardSection extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
+                    flex: 10,
                     child: DataTableWidget(
+                      displayNames: true,
                       textGroup: _textSizeGroup,
+                      allAgentNamesInOrder: _allAgentNames,
+                      headlineGroup: _headlineGroup,
                       isUpper: isUpper,
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) => agent.date.day == startDate.day - 1)
@@ -139,8 +160,11 @@ class DashBoardSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 7,
                     child: DataTableWidget(
                       textGroup: _textSizeGroup,
+                      allAgentNamesInOrder: _allAgentNames,
+                      headlineGroup: _headlineGroup,
                       isUpper: isUpper,
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
@@ -154,8 +178,11 @@ class DashBoardSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 7,
                     child: DataTableWidget(
                       textGroup: _textSizeGroup,
+                      allAgentNamesInOrder: _allAgentNames,
+                      headlineGroup: _headlineGroup,
                       isUpper: isUpper,
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
@@ -169,8 +196,11 @@ class DashBoardSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 7,
                     child: DataTableWidget(
                       textGroup: _textSizeGroup,
+                      allAgentNamesInOrder: _allAgentNames,
+                      headlineGroup: _headlineGroup,
                       isUpper: isUpper,
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
@@ -184,8 +214,11 @@ class DashBoardSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 7,
                     child: DataTableWidget(
                       textGroup: _textSizeGroup,
+                      allAgentNamesInOrder: _allAgentNames,
+                      headlineGroup: _headlineGroup,
                       isUpper: isUpper,
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
@@ -199,8 +232,11 @@ class DashBoardSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 7,
                     child: DataTableWidget(
                       textGroup: _textSizeGroup,
+                      allAgentNamesInOrder: _allAgentNames,
+                      headlineGroup: _headlineGroup,
                       isUpper: isUpper,
                       agentsForThisDate: isUpper
                           ? Provider.of<List<Agent>>(context, listen: false)

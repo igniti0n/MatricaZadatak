@@ -8,13 +8,18 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 class DataTableWidget extends StatefulWidget {
   final List<Agent> agentsForThisDate;
-
+  final AutoSizeGroup headlineGroup;
   final AutoSizeGroup textGroup;
+  final List<String> allAgentNamesInOrder;
   final bool isUpper;
+  final bool displayNames;
   DataTableWidget({
     Key key,
     this.agentsForThisDate,
     this.isUpper = true,
+    this.headlineGroup,
+    this.allAgentNamesInOrder,
+    this.displayNames = false,
     @required this.textGroup,
   }) : super(key: key);
 
@@ -46,27 +51,29 @@ class _DataTableWidgetState extends State<DataTableWidget>
   }
 
   Widget _createRow(ThemeData theme, List<String> text, double spacing,
-      {bool isFinal = false}) {
+      {bool isFinal = false, String agentName = ""}) {
     return Expanded(
       child: Row(
         children: [
-          Expanded(
-            child: AutoSizeText(
-              text[0],
-              style: isFinal
-                  ? theme.textTheme.bodyText1
-                      .copyWith(fontWeight: FontWeight.w900)
-                  : theme.textTheme.bodyText1,
-              group: widget.textGroup,
-              textAlign: TextAlign.center,
-              minFontSize: 1,
+          if (widget.displayNames)
+            Expanded(
+              child: AutoSizeText(
+                isFinal ? "UKUPNO" : agentName,
+                style: isFinal
+                    ? theme.textTheme.bodyText1.copyWith(
+                        fontWeight: FontWeight.w900,
+                        decoration: TextDecoration.underline)
+                    : theme.textTheme.bodyText1,
+                group: widget.textGroup,
+                textAlign: TextAlign.center,
+                minFontSize: 1,
+              ),
             ),
-          ),
           Expanded(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 5),
               child: Container(
-                color: isFinal ? Colors.green : Colors.blue[800],
+                // color: isFinal ? Colors.green : Colors.blue[800],
                 height: double.infinity,
                 // width: double.minPositive,
                 alignment: Alignment.center,
@@ -83,7 +90,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 5),
               child: Container(
-                color: isFinal ? Colors.green : Colors.blue,
+                //color: isFinal ? Colors.green : Colors.blue,
                 height: double.infinity,
                 // width: double.minPositive,
                 alignment: Alignment.center,
@@ -100,7 +107,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 5),
               child: Container(
-                color: isFinal ? Colors.green : Colors.blue,
+                // color: isFinal ? Colors.green : Colors.blue,
                 height: double.infinity,
                 // width: double.minPositive,
                 alignment: Alignment.center,
@@ -123,21 +130,24 @@ class _DataTableWidgetState extends State<DataTableWidget>
     final ThemeData _theme = Theme.of(context);
     // final Size _availableSize = MediaQuery.of(context).size;
 
+    final TextStyle _headlineStyle = _theme.textTheme.bodyText1.copyWith(
+        fontWeight: FontWeight.bold, color: Colors.black, fontSize: 12);
+
     final Widget _headlineText = Row(children: [
       Expanded(
         child: AutoSizeText(
           'Agent',
-          style: _theme.textTheme.bodyText1
-              .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+          style: _headlineStyle,
           textAlign: TextAlign.center,
+          group: widget.headlineGroup,
           minFontSize: 1,
         ),
       ),
       Expanded(
         child: AutoSizeText(
-          'Dogovoreni Sastanci',
-          style: _theme.textTheme.bodyText1
-              .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+          'Sastanci',
+          style: _headlineStyle,
+          group: widget.headlineGroup,
           textAlign: TextAlign.center,
           minFontSize: 1,
         ),
@@ -145,24 +155,24 @@ class _DataTableWidgetState extends State<DataTableWidget>
       Expanded(
         child: AutoSizeText(
           'Prodaja',
-          style: _theme.textTheme.bodyText1
-              .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+          style: _headlineStyle,
+          group: widget.headlineGroup,
           textAlign: TextAlign.center,
           minFontSize: 1,
         ),
       ),
       Expanded(
         child: AutoSizeText(
-          'Dogovoreni \n Lead-ovi',
-          style: _theme.textTheme.bodyText1
-              .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+          'Lead-ovi',
+          style: _headlineStyle,
+          group: widget.headlineGroup,
           textAlign: TextAlign.center,
           minFontSize: 1,
         ),
       ),
     ]);
 
-    final int _rowDataLimit = widget.isUpper ? 12 : 8;
+    final int _rowDataLimit = widget.isUpper ? 10 : 8;
     List<String> _agentData;
     List<String> _ukupno = [
       'UKUPNO',
@@ -189,15 +199,29 @@ class _DataTableWidgetState extends State<DataTableWidget>
           _ukupno.add(_sumLeads.toString());
 
           for (int i = 0; i < _rowDataLimit; i++) {
-            if (i < widget.agentsForThisDate.length) {
-              _agentData = [
-                ' ${widget.agentsForThisDate[i].name}',
-                '${widget.agentsForThisDate[i].agreedAppointments}',
-                '${widget.agentsForThisDate[i].sales}',
-                '${widget.agentsForThisDate[i].leads}',
-              ];
-              _tableRows.add(
-                  _createRow(_theme, _agentData, constraints.maxWidth * 0.1));
+            print(widget.allAgentNamesInOrder);
+            if (i < widget.allAgentNamesInOrder.length) {
+              //AKO TRENUTNI AGENT IMA UNOS U OVOM DATUMU
+              if (widget.agentsForThisDate.any((Agent agent) =>
+                  agent.name == widget.allAgentNamesInOrder[i])) {
+                //nadji agenta
+                int _agentIndex = widget.agentsForThisDate.indexWhere(
+                    (Agent agent) =>
+                        agent.name == widget.allAgentNamesInOrder[i]);
+                _agentData = [
+                  ' ${widget.agentsForThisDate[_agentIndex].name}',
+                  '${widget.agentsForThisDate[_agentIndex].agreedAppointments}',
+                  '${widget.agentsForThisDate[_agentIndex].sales}',
+                  '${widget.agentsForThisDate[_agentIndex].leads}',
+                ];
+                _tableRows.add(_createRow(
+                    _theme, _agentData, constraints.maxWidth * 0.1,
+                    agentName: widget.allAgentNamesInOrder[i]));
+              } else {
+                _tableRows.add(_createRow(
+                    _theme, _emptyData, constraints.maxWidth * 0.1,
+                    agentName: widget.allAgentNamesInOrder[i]));
+              }
             } else {
               _tableRows.add(
                   _createRow(_theme, _emptyData, constraints.maxWidth * 0.1));
@@ -218,7 +242,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    _headlineText,
+                    Expanded(child: _headlineText),
                     ..._tableRows,
                     if (!widget.isUpper)
                       Expanded(
@@ -234,13 +258,13 @@ class _DataTableWidgetState extends State<DataTableWidget>
               Column(
                 children: [
                   Container(
-                    height: 10,
+                    height: 25,
                   ),
                   Container(
                     width: 2,
                     height: widget.isUpper
-                        ? constraints.maxHeight * 0.9
-                        : constraints.maxHeight * 0.7,
+                        ? constraints.maxHeight * 0.8
+                        : constraints.maxHeight * 0.75,
                     color: Colors.grey[700],
                   ),
                   Expanded(

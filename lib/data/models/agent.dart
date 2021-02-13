@@ -16,7 +16,7 @@ class Agent {
   factory Agent.fromMap(Map<String, dynamic> agentMap) {
     String _agentName = (agentMap['AgentName'] as String);
     List<String> _parts = _agentName.split(' ');
-    _agentName = _parts[0] + ' ' + _parts[1].substring(0, 1) + '.';
+    _agentName = _parts[0]; //+ ' ' + _parts[1].substring(0, 1) + '.';
     return new Agent(
       agreedAppointments: agentMap['Agreed'],
       date: DateTime.parse(agentMap['Date']),

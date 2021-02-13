@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 
 class DataProviderService {
   Future<List<Agent>> getData(DateTime startDate, bool isUpper) async {
+    print(startDate);
     try {
       final DateTime _endDateUpper = startDate.add(Duration(days: 4));
       final DateTime _endDateLower = startDate.add(Duration(days: 8));
@@ -28,9 +29,11 @@ class DataProviderService {
         },
       );
 
-      // log(isUpper
-      //     ? "UPPER DATA RESPONSE: ${_response.body}"
-      //     : "LOWER DATA RESPONSE: ${_response.body}");
+      log(isUpper
+          ? "UPPER DATA RESPONSE: ${_response.body}"
+          : "LOWER DATA RESPONSE: ${_response.body}");
+
+      print(_response.statusCode);
 
       final List<Agent> _agents = (jsonDecode(_response.body) as List<dynamic>)
           .map((agent) => Agent.fromMap(agent))

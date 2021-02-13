@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:MatricaZadatak/presentation/widgets/into_builder.dart';
 import 'package:flutter/material.dart';
 
-import '../../presentation/screens/dash_board_builder.dart';
+import '../dash_board_builder.dart';
 import '../../data/services/authentication_service.dart';
 
 import 'package:provider/provider.dart';
@@ -46,7 +47,7 @@ class _AuthenticationBuilderState extends State<AuthenticationBuilder> {
         } else {
           _timer.cancel();
 
-          return DashBoardBuilder();
+          return IntroBuilder();
         }
       },
     );
