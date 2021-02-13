@@ -34,8 +34,8 @@ class DashBoardSection extends StatelessWidget {
               flex: 1,
               child: AutoSizeText(
                 isUpper
-                    ? 'SASTANCI I PRODAJE PO AGENTU CC (tjedan po tijedan i suma za mijesec)'
-                    : 'SASTANCI I PRODAJE PO AGENTU PRODAJE (svaki tijedan od ponedjeljka do petka)',
+                    ? 'SASTANCI I PRODAJE PO AGENTU CC'
+                    : 'SASTANCI I PRODAJE PO AGENTU PRODAJE',
                 minFontSize: 3,
                 textAlign: TextAlign.center,
                 style: Theme.of(context)
@@ -50,7 +50,7 @@ class DashBoardSection extends StatelessWidget {
                 children: [
                   Expanded(
                     child: AutoSizeText(
-                      'PONEDJELJAK ${DateFormat('d-M').format(startDate)}',
+                      'PONEDJELJAK ${DateFormat('d.M.y').format(startDate)}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -61,7 +61,7 @@ class DashBoardSection extends StatelessWidget {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      'UTORAK ${DateFormat('d-M').format(startDate.add(Duration(days: 1)))}',
+                      'UTORAK ${DateFormat('d.M.y').format(startDate.add(Duration(days: 1)))}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -72,7 +72,7 @@ class DashBoardSection extends StatelessWidget {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      'SRIJEDA ${DateFormat('d-M').format(startDate.add(Duration(days: 2)))}',
+                      'SRIJEDA ${DateFormat('d.M.y').format(startDate.add(Duration(days: 2)))}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -83,7 +83,7 @@ class DashBoardSection extends StatelessWidget {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      'ČETVRTAK ${DateFormat('d-M').format(startDate.add(Duration(days: 3)))}',
+                      'ČETVRTAK ${DateFormat('d.M.y').format(startDate.add(Duration(days: 3)))}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -94,7 +94,7 @@ class DashBoardSection extends StatelessWidget {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      'PETAK ${DateFormat('d-M').format(startDate.add(Duration(days: 4)))}',
+                      'PETAK ${DateFormat('d.M.y').format(startDate.add(Duration(days: 4)))}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -107,7 +107,7 @@ class DashBoardSection extends StatelessWidget {
                     child: AutoSizeText(
                       isUpper
                           ? 'UKUPNO'
-                          : 'PONEDJELJAK ${DateFormat('d-M').format(startDate.add(Duration(days: 7)))}',
+                          : 'PONEDJELJAK ${DateFormat('d.M.y').format(startDate.add(Duration(days: 7)))}',
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
