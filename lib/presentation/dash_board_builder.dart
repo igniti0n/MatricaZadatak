@@ -25,11 +25,14 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
     with SingleTickerProviderStateMixin {
   DateNotifier date;
   TabController _tabController;
-
+  FocusNode left = new FocusNode();
   @override
   void initState() {
     super.initState();
     _tabController = new TabController(length: 3, vsync: this);
+
+    ccFocusNode = new FocusNode();
+    singleFocusNode = new FocusNode();
 
     DateTime currDate = DateTime.now();
     while (currDate.weekday != 1) {
@@ -56,7 +59,16 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
 
   void navigate(NavigatorCubit _navigatorCubit, String route, int index) {
     _tabController.animateTo(index);
+
     _navigatorCubit.goToReplace(route);
+    print("W T F");
+    // if (route == fullViewRoute) {
+    //   FocusScope.of(context).requestFocus(fullFocusNode);
+    // } else if (route == singleViewRoute) {
+    //   FocusScope.of(context).requestFocus(ccFocusNode);
+    // } else {
+    //   FocusScope.of(context).requestFocus(singleFocusNode);
+    // }
   }
 
   @override
@@ -67,6 +79,8 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
 
   @override
   Widget build(BuildContext context) {
+    FocusScope.of(context).requestFocus(left);
+
     final NavigatorCubit _navigatorCubit =
         BlocProvider.of<NavigatorCubit>(context, listen: false);
     log("BUILD DASH BOARD BUILDER ");
@@ -88,7 +102,9 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
               indicatorWeight: 6,
               tabs: [
                 DpadWidget(
-                  child: TextButton(
+                  child: //Text("a"),
+                      TextButton(
+                    focusNode: fullFocusNode,
                     child: Text("full"),
                     style: ButtonStyle(
                         foregroundColor:
@@ -99,7 +115,9 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
                   onClick: () => navigate(_navigatorCubit, fullViewRoute, 0),
                 ),
                 DpadWidget(
-                  child: TextButton(
+                  child: //Text("a"),
+                      TextButton(
+                    focusNode: ccFocusNode,
                     child: Text("only cc"),
                     style: ButtonStyle(
                         foregroundColor:
@@ -109,7 +127,9 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
                   onClick: () => navigate(_navigatorCubit, onlyCCRoute, 1),
                 ),
                 DpadWidget(
-                  child: TextButton(
+                  child: // Text("a"),
+                      TextButton(
+                    focusNode: singleFocusNode,
                     child: Text("single"),
                     style: ButtonStyle(
                         foregroundColor:
@@ -122,11 +142,12 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
               ],
             ),
           ),
-          SizedBox(
-            width: 40,
-          ),
+          // SizedBox(
+          //   width: 40,
+          // ),
           DpadWidget(
               child: IconButton(
+                focusNode: left,
                 icon: Icon(Icons.arrow_back_ios),
                 color: Colors.white,
                 onPressed: () {
@@ -159,16 +180,20 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
         ],
       ),
       backgroundColor: Colors.grey[300],
-      body: ChangeNotifierProvider<DateNotifier>(
-        create: (ctx) => date,
-        builder: (ctx, child) {
-          return child;
-        },
-        child: SizedBox.expand(
-          child: Navigator(
-            key: instanceCreator<AppRouter>().navigatorKey,
-            initialRoute: fullViewRoute,
-            onGenerateRoute: onGenerateRoute,
+      body: FocusScope(
+        canRequestFocus: false,
+        autofocus: false,
+        child: ChangeNotifierProvider<DateNotifier>(
+          create: (ctx) => date,
+          builder: (ctx, child) {
+            return child;
+          },
+          child: SizedBox.expand(
+            child: Navigator(
+              key: instanceCreator<AppRouter>().navigatorKey,
+              initialRoute: fullViewRoute,
+              onGenerateRoute: onGenerateRoute,
+            ),
           ),
         ),
       ),

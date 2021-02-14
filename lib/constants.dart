@@ -1,8 +1,14 @@
+import 'package:flutter/material.dart';
+
 enum View {
   FullView,
   OnlyCC,
   SingleDay,
 }
+
+FocusNode fullFocusNode;
+FocusNode ccFocusNode;
+FocusNode singleFocusNode;
 
 const String fullViewRoute = "/fullView";
 

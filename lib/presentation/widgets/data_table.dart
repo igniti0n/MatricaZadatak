@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../data/models/agent.dart';
 
@@ -93,7 +94,10 @@ class _DataTableWidgetState extends State<DataTableWidget>
                 alignment: Alignment.center,
                 child: AutoSizeText(
                   text[1],
-                  style: theme.textTheme.bodyText1,
+                  style: theme.textTheme.bodyText1.copyWith(
+                      decoration: isFinal
+                          ? TextDecoration.underline
+                          : TextDecoration.none),
                   textAlign: TextAlign.center,
                   minFontSize: 1,
                 ),
@@ -111,7 +115,10 @@ class _DataTableWidgetState extends State<DataTableWidget>
                 alignment: Alignment.center,
                 child: AutoSizeText(
                   text[2],
-                  style: theme.textTheme.bodyText1,
+                  style: theme.textTheme.bodyText1.copyWith(
+                      decoration: isFinal
+                          ? TextDecoration.underline
+                          : TextDecoration.none),
                   textAlign: TextAlign.center,
                   minFontSize: 1,
                 ),
@@ -129,7 +136,10 @@ class _DataTableWidgetState extends State<DataTableWidget>
                 alignment: Alignment.center,
                 child: AutoSizeText(
                   text[3],
-                  style: theme.textTheme.bodyText1,
+                  style: theme.textTheme.bodyText1.copyWith(
+                      decoration: isFinal
+                          ? TextDecoration.underline
+                          : TextDecoration.none),
                   textAlign: TextAlign.center,
                   minFontSize: 1,
                 ),
@@ -147,9 +157,10 @@ class _DataTableWidgetState extends State<DataTableWidget>
     // final Size _availableSize = MediaQuery.of(context).size;
 
     final TextStyle _headlineStyle = _theme.textTheme.bodyText1.copyWith(
-        fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20);
+        fontWeight: FontWeight.bold, color: Colors.black, fontSize: 30);
 
     final Widget _headlineText = Expanded(
+      flex: widget.isOnly ? 2 : 1,
       child: Row(children: [
         if (widget.displayNames)
           Expanded(
