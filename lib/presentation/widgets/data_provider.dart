@@ -38,7 +38,6 @@ class DataProvider extends StatelessWidget {
             )),
           );
         } else if (state is DataLoaded) {
-          print(state.upperData);
           return Provider<List<Agent>>(
             create: (ctx) => getSums(
                 _sumeAgenata, isUpper ? state.upperData : state.lowerData),

@@ -32,11 +32,8 @@ class SingleSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("BUILDAM SINGLE SECTION");
-    print(agentsToBeDisplayed);
     final DateTime startDate =
         Provider.of<DateNotifier>(context, listen: false).getDate;
-    print(startDate);
 
     //služio kao reference svakoj data table, da zan koji agent fali i da ih poreda
     final List<String> _allAgentNames = [];

@@ -6,10 +6,6 @@ enum View {
   SingleDay,
 }
 
-FocusNode fullFocusNode;
-FocusNode ccFocusNode;
-FocusNode singleFocusNode;
-
 const String fullViewRoute = "/fullView";
 
 const String onlyCCRoute = "/onlyCC";

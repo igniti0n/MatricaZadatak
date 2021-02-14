@@ -7,6 +7,7 @@ import 'package:MatricaZadatak/presentation/widgets/dpad.dart';
 import 'package:MatricaZadatak/routing/route_generator.dart';
 import 'package:MatricaZadatak/routing/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../constants.dart';
 import '../logic/date_provider.dart';
@@ -26,13 +27,14 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
   DateNotifier date;
   TabController _tabController;
   FocusNode left = new FocusNode();
+  FocusNode middle = new FocusNode();
+  FocusNode right = new FocusNode();
+  FocusNode back = new FocusNode();
+  FocusNode forward = new FocusNode();
   @override
   void initState() {
     super.initState();
     _tabController = new TabController(length: 3, vsync: this);
-
-    ccFocusNode = new FocusNode();
-    singleFocusNode = new FocusNode();
 
     DateTime currDate = DateTime.now();
     while (currDate.weekday != 1) {
@@ -61,7 +63,7 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
     _tabController.animateTo(index);
 
     _navigatorCubit.goToReplace(route);
-    print("W T F");
+
     // if (route == fullViewRoute) {
     //   FocusScope.of(context).requestFocus(fullFocusNode);
     // } else if (route == singleViewRoute) {
@@ -101,98 +103,130 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
               indicatorSize: TabBarIndicatorSize.tab,
               indicatorWeight: 6,
               tabs: [
-                DpadWidget(
-                  child: //Text("a"),
-                      TextButton(
-                    focusNode: fullFocusNode,
-                    child: Text("full"),
-                    style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white)),
-                    onPressed: () =>
-                        navigate(_navigatorCubit, fullViewRoute, 0),
-                  ),
-                  onClick: () => navigate(_navigatorCubit, fullViewRoute, 0),
+                IconButton(
+                  // focusNode: left,
+                  focusColor: Colors.green[900],
+                  icon: Text("1."),
+                  // style: ButtonStyle(
+                  //     foregroundColor:
+                  //         MaterialStateProperty.all<Color>(Colors.white)),
+                  onPressed: () => navigate(_navigatorCubit, fullViewRoute, 0),
                 ),
-                DpadWidget(
-                  child: //Text("a"),
-                      TextButton(
-                    focusNode: ccFocusNode,
-                    child: Text("only cc"),
-                    style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white)),
-                    onPressed: () => navigate(_navigatorCubit, onlyCCRoute, 1),
-                  ),
-                  onClick: () => navigate(_navigatorCubit, onlyCCRoute, 1),
+
+                IconButton(
+                  //focusNode: middle,
+                  icon: Text("2."),
+                  focusColor: Colors.green[900],
+                  // style: ButtonStyle(
+                  //     foregroundColor:
+                  //         MaterialStateProperty.all<Color>(Colors.white)),
+                  onPressed: () => navigate(_navigatorCubit, onlyCCRoute, 1),
                 ),
-                DpadWidget(
-                  child: // Text("a"),
-                      TextButton(
-                    focusNode: singleFocusNode,
-                    child: Text("single"),
-                    style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white)),
-                    onPressed: () =>
-                        navigate(_navigatorCubit, singleViewRoute, 2),
-                  ),
-                  onClick: () => navigate(_navigatorCubit, singleViewRoute, 2),
+
+                IconButton(
+                  // focusNode: right,
+                  icon: Text("3."),
+                  focusColor: Colors.green[900],
+                  // style: ButtonStyle(
+                  //   foregroundColor:
+                  //       MaterialStateProperty.all<Color>(Colors.white),
+                  // ),
+                  onPressed: () =>
+                      navigate(_navigatorCubit, singleViewRoute, 2),
                 ),
+
+                // DpadWidget(
+                //     child: IconButton(
+                //       // focusNode: back,
+                //       icon: Icon(Icons.arrow_back_ios),
+                //       color: Colors.white,
+                //       onPressed: () {
+                //         _navigatorCubit.goLeft();
+                //         if (_navigatorCubit.view != View.SingleDay)
+                //           _onBackwards();
+                //       },
+                //       focusColor: Colors.green[900],
+                //     ),
+                //     onClick: () {
+                //       _navigatorCubit.goLeft();
+                //       if (_navigatorCubit.view != View.SingleDay) _onBackwards();
+                //     }),
+                // DpadWidget(
+                //   child: IconButton(
+                //     // focusNode: forward,
+                //     focusColor: Colors.green[900],
+                //     icon: Icon(
+                //       Icons.arrow_forward_ios,
+                //       color: Colors.white,
+                //     ),
+                //     onPressed: () {
+                //       _navigatorCubit.goRight();
+                //       if (_navigatorCubit.view != View.SingleDay) _onForward();
+                //     },
+                //   ),
+                //   onClick: () {
+                //     _navigatorCubit.goRight();
+                //     if (_navigatorCubit.view != View.SingleDay) _onForward();
+                //   },
+                // ),
               ],
             ),
-          ),
-          // SizedBox(
-          //   width: 40,
-          // ),
-          DpadWidget(
-              child: IconButton(
-                focusNode: left,
-                icon: Icon(Icons.arrow_back_ios),
-                color: Colors.white,
-                onPressed: () {
-                  _navigatorCubit.goLeft();
-                  if (_navigatorCubit.view != View.SingleDay) _onBackwards();
-                },
-                focusColor: Colors.green[900],
-              ),
-              onClick: () {
-                _navigatorCubit.goLeft();
-                if (_navigatorCubit.view != View.SingleDay) _onBackwards();
-              }),
-          DpadWidget(
-            child: IconButton(
-              focusColor: Colors.green[900],
-              icon: Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                _navigatorCubit.goRight();
-                if (_navigatorCubit.view != View.SingleDay) _onForward();
-              },
-            ),
-            onClick: () {
-              _navigatorCubit.goRight();
-              if (_navigatorCubit.view != View.SingleDay) _onForward();
-            },
           ),
         ],
       ),
       backgroundColor: Colors.grey[300],
       body: FocusScope(
         canRequestFocus: false,
-        autofocus: false,
-        child: ChangeNotifierProvider<DateNotifier>(
-          create: (ctx) => date,
-          builder: (ctx, child) {
-            return child;
+        autofocus: true,
+        child: RawKeyboardListener(
+          autofocus: true,
+          focusNode: left,
+          onKey: (RawKeyEvent event) {
+            // if (widget.onFocus != null) widget.onFocus(isFocused);
+
+            if (event is RawKeyDownEvent &&
+                event.data is RawKeyEventDataAndroid) {
+              RawKeyDownEvent rawKeyDownEvent = event;
+              RawKeyEventDataAndroid rawKeyEventDataAndroid =
+                  rawKeyDownEvent.data;
+              print(rawKeyEventDataAndroid.keyCode);
+              switch (rawKeyEventDataAndroid.keyCode) {
+                case 8:
+                  if (_navigatorCubit.getView != View.FullView)
+                    navigate(_navigatorCubit, fullViewRoute, 0);
+                  break;
+                case 9:
+                  if (_navigatorCubit.getView != View.OnlyCC)
+                    navigate(_navigatorCubit, onlyCCRoute, 1);
+                  break;
+                case 10:
+                  if (_navigatorCubit.getView != View.SingleDay)
+                    navigate(_navigatorCubit, singleViewRoute, 2);
+                  break;
+                case 21:
+                  _navigatorCubit.goLeft();
+                  if (_navigatorCubit.view != View.SingleDay) _onBackwards();
+                  break;
+                case 22:
+                  _navigatorCubit.goRight();
+                  if (_navigatorCubit.view != View.SingleDay) _onForward();
+                  break;
+                default:
+                  break;
+              }
+            }
           },
-          child: SizedBox.expand(
-            child: Navigator(
-              key: instanceCreator<AppRouter>().navigatorKey,
-              initialRoute: fullViewRoute,
-              onGenerateRoute: onGenerateRoute,
+          child: ChangeNotifierProvider<DateNotifier>(
+            create: (ctx) => date,
+            builder: (ctx, child) {
+              return child;
+            },
+            child: SizedBox.expand(
+              child: Navigator(
+                key: instanceCreator<AppRouter>().navigatorKey,
+                initialRoute: fullViewRoute,
+                onGenerateRoute: onGenerateRoute,
+              ),
             ),
           ),
         ),

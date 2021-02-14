@@ -213,8 +213,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
     List<String> _ukupno = [
       'UKUPNO',
     ];
-    print("BUILDING THIS");
-    print(widget.agentsForThisDate.length);
+
     _tableRows = [];
     return
         // AnimatedBuilder(
