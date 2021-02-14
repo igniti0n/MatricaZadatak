@@ -55,7 +55,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
 
   Widget _createRow(ThemeData theme, List<String> text, double spacing,
       {bool isFinal = false, String agentName = ""}) {
-    final flex1 = widget.isOnly ? 6 : 3;
+    final flex1 = widget.isOnly ? 6 : 2;
     final flex2 = widget.isOnly ? 4 : 1;
     return Expanded(
       child: Row(
