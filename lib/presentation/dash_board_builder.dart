@@ -1,10 +1,11 @@
 import 'dart:developer';
 
-import 'package:MatricaZadatak/data/models/agent.dart';
-import 'package:MatricaZadatak/data/services/data_provider_service.dart';
+import 'package:MatricaZadatak/instance_creator.dart';
+import 'package:MatricaZadatak/logic/cubit/navigator_cubit.dart';
 import 'package:MatricaZadatak/logic/data_bloc/data_bloc.dart';
-import 'package:MatricaZadatak/presentation/screens/dashboard.dart';
 import 'package:MatricaZadatak/presentation/widgets/dpad.dart';
+import 'package:MatricaZadatak/routing/route_generator.dart';
+import 'package:MatricaZadatak/routing/router.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -23,27 +24,6 @@ class DashBoardBuilder extends StatefulWidget {
 class _DashBoardBuilderState extends State<DashBoardBuilder>
     with SingleTickerProviderStateMixin {
   DateNotifier date;
-
-  View _currentView = View.FullView;
-
-  void _onForward() {
-    date.increaseStartDate();
-    BlocProvider.of<DataBloc>(context, listen: false)
-        .add(LoadData(date: date.getDate));
-  }
-
-  void _onBackwards() {
-    date.decreaseStartDate();
-    BlocProvider.of<DataBloc>(context, listen: false)
-        .add(LoadData(date: date.getDate));
-  }
-
-  void _setView(View view) {
-    setState(() {
-      _currentView = view;
-    });
-  }
-
   TabController _tabController;
 
   @override
@@ -60,37 +40,41 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
         .add(LoadData(date: currDate));
   }
 
+  void _onForward() {
+    date.increaseStartDate();
+    print("FORWARDS");
+    BlocProvider.of<DataBloc>(context, listen: false)
+        .add(LoadData(date: date.getDate));
+  }
+
+  void _onBackwards() {
+    date.decreaseStartDate();
+    print("BACKWARDS");
+    BlocProvider.of<DataBloc>(context, listen: false)
+        .add(LoadData(date: date.getDate));
+  }
+
+  void navigate(NavigatorCubit _navigatorCubit, String route, int index) {
+    _tabController.animateTo(index);
+    _navigatorCubit.goToReplace(route);
+  }
+
   @override
   void dispose() {
     date.dispose();
     super.dispose();
   }
 
-  Widget buildBody(View view, List<Agent> upper, List<Agent> lower) {
-    print(upper);
-    print("!!!!!!!!!!!!!!!!!!");
-    print(lower);
-    return DashBoard(
-      upper: upper,
-      lower: lower,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final NavigatorCubit _navigatorCubit =
+        BlocProvider.of<NavigatorCubit>(context, listen: false);
     log("BUILD DASH BOARD BUILDER ");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text('SalvisTV Dashboard'),
         actions: [
-          // DpadWidget(
-          //     child: TextButton(
-          //       onPressed: () => _setView(View.OnlyCC),
-          //       style: ButtonStyle(),
-          //       child: Text("Top View"),
-          //     ),
-          //     onClick: _onBackwards),
           SizedBox(
             width: 400,
             height: kToolbarHeight - 10,
@@ -104,18 +88,36 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
               indicatorWeight: 6,
               tabs: [
                 DpadWidget(
-                  child: Text(
-                    "full",
+                  child: TextButton(
+                    child: Text("full"),
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white)),
+                    onPressed: () =>
+                        navigate(_navigatorCubit, fullViewRoute, 0),
                   ),
-                  onClick: () => _setView(View.FullView),
+                  onClick: () => navigate(_navigatorCubit, fullViewRoute, 0),
                 ),
                 DpadWidget(
-                  child: Text("only cc"),
-                  onClick: () => _setView(View.OnlyCC),
+                  child: TextButton(
+                    child: Text("only cc"),
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white)),
+                    onPressed: () => navigate(_navigatorCubit, onlyCCRoute, 1),
+                  ),
+                  onClick: () => navigate(_navigatorCubit, onlyCCRoute, 1),
                 ),
                 DpadWidget(
-                  child: Text("single"),
-                  onClick: () => _setView(View.SingleDay),
+                  child: TextButton(
+                    child: Text("single"),
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white)),
+                    onPressed: () =>
+                        navigate(_navigatorCubit, singleViewRoute, 2),
+                  ),
+                  onClick: () => navigate(_navigatorCubit, singleViewRoute, 2),
                 ),
               ],
             ),
@@ -127,62 +129,49 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
               child: IconButton(
                 icon: Icon(Icons.arrow_back_ios),
                 color: Colors.white,
-                onPressed: _onBackwards,
+                onPressed: () {
+                  _navigatorCubit.goLeft();
+                  if (_navigatorCubit.view != View.SingleDay) _onBackwards();
+                },
                 focusColor: Colors.green[900],
               ),
-              onClick: _onBackwards),
+              onClick: () {
+                _navigatorCubit.goLeft();
+                if (_navigatorCubit.view != View.SingleDay) _onBackwards();
+              }),
           DpadWidget(
-              child: IconButton(
-                focusColor: Colors.green[900],
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.white,
-                ),
-                onPressed: _onForward,
+            child: IconButton(
+              focusColor: Colors.green[900],
+              icon: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.white,
               ),
-              onClick: _onForward),
+              onPressed: () {
+                _navigatorCubit.goRight();
+                if (_navigatorCubit.view != View.SingleDay) _onForward();
+              },
+            ),
+            onClick: () {
+              _navigatorCubit.goRight();
+              if (_navigatorCubit.view != View.SingleDay) _onForward();
+            },
+          ),
         ],
       ),
       backgroundColor: Colors.grey[300],
-      body:
-          //  FutureBuilder(
-          //   future: Provider.of<DataProviderService>(context, listen: false)
-          //       .getData(date.getDate, true),
-          //   builder: (ctx, _) => Container(
-          //     width: double.infinity,
-          //     height: double.infinity,
-          //     child: Center(
-          //         child: CircularProgressIndicator(
-          //       strokeWidth: 2,
-          //     )),
-          //   ),
-          // ),
-          ChangeNotifierProvider(
-              create: (_) => date,
-              builder: (_, __) => BlocBuilder<DataBloc, DataState>(
-                    builder: (_, state) {
-                      print("STATE CHANGED.");
-                      if (state is DataLoading) {
-                        return Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: Center(
-                              child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                          )),
-                        );
-                      } else if (state is DataLoaded) {
-                        return buildBody(
-                            _currentView, state.upperData, state.lowerData);
-                      } else {
-                        return Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: Center(child: Text("Data failed to load.")),
-                        );
-                      }
-                    },
-                  )),
+      body: ChangeNotifierProvider<DateNotifier>(
+        create: (ctx) => date,
+        builder: (ctx, child) {
+          return child;
+        },
+        child: SizedBox.expand(
+          child: Navigator(
+            key: instanceCreator<AppRouter>().navigatorKey,
+            initialRoute: fullViewRoute,
+            onGenerateRoute: onGenerateRoute,
+          ),
+        ),
+      ),
     );
   }
 }

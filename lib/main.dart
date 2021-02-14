@@ -1,4 +1,5 @@
 import 'package:MatricaZadatak/data/respositories/agents_repository.dart';
+import 'package:MatricaZadatak/instance_creator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,6 +10,7 @@ import './data/services/data_provider_service.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  initInstances();
   runApp(MyApp());
 }
 

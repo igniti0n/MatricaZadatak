@@ -1,14 +1,11 @@
 import 'dart:developer';
 
-import 'package:MatricaZadatak/data/models/agent.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/data_provider.dart';
 
 class DashBoard extends StatelessWidget {
-  final List<Agent> upper;
-  final List<Agent> lower;
-  const DashBoard({this.lower, this.upper});
+  const DashBoard();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +16,6 @@ class DashBoard extends StatelessWidget {
         _mediaData.padding.bottom -
         kToolbarHeight;
 
-    print(upper.toString());
     return Column(
       children: [
         SizedBox(
@@ -28,7 +24,6 @@ class DashBoard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8.0, 4.0, 0, 2),
             child: DataProvider(
-              agentsList: upper,
               isUpper: true,
             ),
           ),
@@ -37,7 +32,6 @@ class DashBoard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8.0, 4.0, 0, 4),
             child: DataProvider(
-              agentsList: lower,
               isUpper: false,
             ),
           ),

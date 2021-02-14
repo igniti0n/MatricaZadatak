@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:MatricaZadatak/data/respositories/agents_repository.dart';
 import 'package:MatricaZadatak/data/services/data_provider_service.dart';
+import 'package:MatricaZadatak/instance_creator.dart';
 import 'package:MatricaZadatak/logic/cubit/navigator_cubit.dart';
 import 'package:MatricaZadatak/logic/data_bloc/data_bloc.dart';
 import 'package:MatricaZadatak/presentation/dash_board_builder.dart';
+import 'package:MatricaZadatak/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -59,7 +61,8 @@ class _IntroBuilderState extends State<IntroBuilder>
               create: (_) => DataBloc(
                   Provider.of<AgentsRepository>(context, listen: false)),
             ),
-            BlocProvider(create: (_) => NavigatorCubit()),
+            BlocProvider(
+                create: (_) => NavigatorCubit(instanceCreator<AppRouter>())),
           ], child: DashBoardBuilder())
         : Center(
             child: AnimatedBuilder(

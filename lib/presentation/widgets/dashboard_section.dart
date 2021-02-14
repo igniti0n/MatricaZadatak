@@ -10,12 +10,14 @@ import 'package:intl/intl.dart';
 
 class DashBoardSection extends StatelessWidget {
   final bool isUpper;
+  final bool isOnly;
 
   final List<Agent> agentsToBeDisplayed;
 
   DashBoardSection({
     Key key,
     this.isUpper = true,
+    this.isOnly,
     @required this.agentsToBeDisplayed,
   })  : assert(agentsToBeDisplayed != null, "Provided Agents can't be null"),
         super(key: key);
@@ -143,8 +145,9 @@ class DashBoardSection extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    flex: 10,
+                    flex: isOnly ? 9 : 10,
                     child: DataTableWidget(
+                      isOnly: true,
                       displayNames: true,
                       textGroup: _textSizeGroup,
                       allAgentNamesInOrder: _allAgentNames,

@@ -33,7 +33,8 @@ class AuthenticationService {
 
 //   Future<void> faks() async {
 //     try {
-//       final Map<String, dynamic> data = {
+//       final Map<String, dynamic>
+// data = {
 //         "Inputs": {
 //           "input1": {
 //             "ColumnNames": [

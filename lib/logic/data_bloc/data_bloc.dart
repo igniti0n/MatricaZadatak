@@ -11,6 +11,7 @@ part 'data_state.dart';
 
 class DataBloc extends Bloc<DataEvent, DataState> {
   final AgentsRepository agentsRepository;
+
   DataBloc(this.agentsRepository) : super(DataLoading());
 
   @override

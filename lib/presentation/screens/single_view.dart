@@ -1,3 +1,4 @@
+import 'package:MatricaZadatak/presentation/widgets/data_provider.dart';
 import 'package:flutter/material.dart';
 
 class SingleView extends StatelessWidget {
@@ -5,8 +6,13 @@ class SingleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: null,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8.0, 4.0, 0, 4),
+      child: DataProvider(
+        isUpper: true,
+        isOnly: true,
+        isSingle: true,
+      ),
     );
   }
 }
