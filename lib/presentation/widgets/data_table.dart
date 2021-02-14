@@ -55,7 +55,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
 
   Widget _createRow(ThemeData theme, List<String> text, double spacing,
       {bool isFinal = false, String agentName = ""}) {
-    final flex1 = widget.isOnly ? 6 : 1;
+    final flex1 = widget.isOnly ? 6 : 3;
     final flex2 = widget.isOnly ? 4 : 1;
     return Expanded(
       child: Row(
@@ -64,22 +64,29 @@ class _DataTableWidgetState extends State<DataTableWidget>
             Expanded(
               flex: flex1,
               child: Container(
-                decoration: BoxDecoration(
-                  border: isFinal
-                      ? Border(top: BorderSide(color: Colors.black, width: 1))
-                      : null,
-                ),
-                child: AutoSizeText(
-                  isFinal ? "UKUPNO" : agentName,
-                  style: isFinal
-                      ? theme.textTheme.bodyText1.copyWith(
-                          fontWeight: FontWeight.w900,
-                          // decoration: TextDecoration.underline,
-                        )
-                      : theme.textTheme.bodyText1,
-                  group: widget.textGroup,
-                  textAlign: TextAlign.left,
-                  minFontSize: 1,
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                    border: isFinal
+                        ? Border(top: BorderSide(color: Colors.black, width: 1))
+                        : null,
+                  ),
+                  child: AutoSizeText(
+                    isFinal ? "UKUPNO" : agentName,
+                    style: isFinal
+                        ? theme.textTheme.bodyText1.copyWith(
+                            fontWeight: FontWeight.w900,
+                            // decoration: TextDecoration.underline,
+                          )
+                        : theme.textTheme.bodyText1,
+                    group: widget.textGroup,
+                    textAlign: TextAlign.left,
+                    minFontSize: 1,
+                    maxLines: 1,
+                  ),
                 ),
               ),
             ),
@@ -90,6 +97,11 @@ class _DataTableWidgetState extends State<DataTableWidget>
               child: Container(
                 // color: isFinal ? Colors.green : Colors.blue[800],
                 height: double.infinity,
+                decoration: BoxDecoration(
+                  border: isFinal
+                      ? Border(top: BorderSide(color: Colors.black, width: 1))
+                      : null,
+                ),
                 // width: double.minPositive,
                 alignment: Alignment.center,
                 child: AutoSizeText(
@@ -100,6 +112,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
                           : TextDecoration.none),
                   textAlign: TextAlign.center,
                   minFontSize: 1,
+                  maxLines: 1,
                 ),
               ),
             ),
@@ -111,6 +124,11 @@ class _DataTableWidgetState extends State<DataTableWidget>
               child: Container(
                 //color: isFinal ? Colors.green : Colors.blue,
                 height: double.infinity,
+                decoration: BoxDecoration(
+                  border: isFinal
+                      ? Border(top: BorderSide(color: Colors.black, width: 1))
+                      : null,
+                ),
                 // width: double.minPositive,
                 alignment: Alignment.center,
                 child: AutoSizeText(
@@ -121,6 +139,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
                           : TextDecoration.none),
                   textAlign: TextAlign.center,
                   minFontSize: 1,
+                  maxLines: 1,
                 ),
               ),
             ),
@@ -131,6 +150,11 @@ class _DataTableWidgetState extends State<DataTableWidget>
               padding: EdgeInsets.symmetric(horizontal: 5),
               child: Container(
                 // color: isFinal ? Colors.green : Colors.blue,
+                decoration: BoxDecoration(
+                  border: isFinal
+                      ? Border(top: BorderSide(color: Colors.black, width: 1))
+                      : null,
+                ),
                 height: double.infinity,
                 // width: double.minPositive,
                 alignment: Alignment.center,
@@ -142,6 +166,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
                           : TextDecoration.none),
                   textAlign: TextAlign.center,
                   minFontSize: 1,
+                  maxLines: 1,
                 ),
               ),
             ),
@@ -154,59 +179,69 @@ class _DataTableWidgetState extends State<DataTableWidget>
   @override
   Widget build(BuildContext context) {
     final ThemeData _theme = Theme.of(context);
-    // final Size _availableSize = MediaQuery.of(context).size;
 
     final TextStyle _headlineStyle = _theme.textTheme.bodyText1.copyWith(
-        fontWeight: FontWeight.bold, color: Colors.black, fontSize: 30);
+        fontWeight: FontWeight.bold, color: Colors.black, fontSize: 24);
 
-    final Widget _headlineText = Expanded(
-      flex: widget.isOnly ? 2 : 1,
-      child: Row(children: [
-        if (widget.displayNames)
-          Expanded(
-            child: AutoSizeText(
-              'Agent',
-              style: _headlineStyle,
-              textAlign: TextAlign.center,
-              group: widget.headlineGroup,
-              maxLines: 1,
-              minFontSize: 1,
-            ),
-          ),
-        if (widget.displayNames) Spacer(),
+    final Widget _headlineText = Row(children: [
+      if (widget.displayNames)
         Expanded(
+          child: AutoSizeText(
+            'Agent',
+            style: _headlineStyle,
+            textAlign: TextAlign.center,
+            group: widget.headlineGroup,
+            maxLines: 1,
+            minFontSize: 1,
+          ),
+        ),
+      if (widget.displayNames) Spacer(),
+      Expanded(
+        child: Padding(
+          padding: widget.isOnly
+              ? EdgeInsets.symmetric(horizontal: 8)
+              : EdgeInsets.symmetric(horizontal: 0),
           child: AutoSizeText(
             'Sastanci',
             style: _headlineStyle,
             maxLines: 1,
             group: widget.headlineGroup,
-            textAlign: widget.displayNames ? TextAlign.left : TextAlign.center,
-            maxFontSize: 10,
+            textAlign: TextAlign.left,
             minFontSize: 1,
           ),
         ),
-        Expanded(
+      ),
+      Expanded(
+        child: Padding(
+          padding: widget.isOnly
+              ? EdgeInsets.symmetric(horizontal: 8)
+              : EdgeInsets.symmetric(horizontal: 0),
           child: AutoSizeText(
             'Prodaja',
             style: _headlineStyle,
             group: widget.headlineGroup,
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.left,
             maxLines: 1,
             minFontSize: 1,
           ),
         ),
-        Expanded(
+      ),
+      Expanded(
+        child: Padding(
+          padding: widget.isOnly
+              ? EdgeInsets.symmetric(horizontal: 8)
+              : EdgeInsets.symmetric(horizontal: 0),
           child: AutoSizeText(
             'Lead-ovi',
             style: _headlineStyle,
             maxLines: 1,
             group: widget.headlineGroup,
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.left,
             minFontSize: 1,
           ),
         ),
-      ]),
-    );
+      ),
+    ]);
 
     final int _rowDataLimit = widget.isUpper ? 10 : 8;
     List<String> _agentData;
@@ -215,15 +250,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
     ];
 
     _tableRows = [];
-    return
-        // AnimatedBuilder(
-        //   animation: _animationController,
-        //   builder: (ctx, child) => Opacity(
-        //     opacity: _animationController.value,
-        //     child: child,
-        //   ),
-        //   child:
-        LayoutBuilder(
+    return LayoutBuilder(
       builder: (ctx, constraints) {
         int _sumAgreed = 0, _sumSales = 0, _sumLeads = 0;
 
@@ -273,8 +300,6 @@ class _DataTableWidgetState extends State<DataTableWidget>
               isFinal: true),
         );
 
-        // log(constraints.maxHeight.toString());
-        // log(constraints.maxWidth.toString());
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -282,7 +307,9 @@ class _DataTableWidgetState extends State<DataTableWidget>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  _headlineText,
+                  Expanded(
+                    child: _headlineText,
+                  ),
                   ..._tableRows,
                   if (!widget.isUpper)
                     Expanded(
@@ -319,146 +346,3 @@ class _DataTableWidgetState extends State<DataTableWidget>
     );
   }
 }
-
-// Widget _createDataRow(ThemeData theme, int index, double spacing) {
-//   return Expanded(
-//     child: Row(children: [
-//       Expanded(
-//         child: AutoSizeText(
-//           agentsForThisDate[index].name,
-//           style: theme.textTheme.bodyText1,
-//           textAlign: TextAlign.center,
-//           minFontSize: 3,
-//         ),
-//       ),
-
-//       // SizedBox(
-//       //   width: spacing,
-//       // ),
-//       Expanded(
-//         child: Container(
-//           padding: EdgeInsets.symmetric(horizontal: 5),
-//           child: Container(
-//             color: Colors.blue[800],
-//             height: double.infinity,
-//             // width: double.minPositive,
-//             alignment: Alignment.center,
-//             child: AutoSizeText(
-//               '${agentsForThisDate[index].agreedAppointments}',
-//               style: theme.textTheme.bodyText1,
-//               textAlign: TextAlign.center,
-//               minFontSize: 3,
-//             ),
-//           ),
-//         ),
-//       ),
-//       // SizedBox(
-//       //   width: spacing,
-//       // ),
-//       Expanded(
-//         child: Container(
-//           padding: EdgeInsets.symmetric(horizontal: 5),
-//           child: Container(
-//             color: Colors.blue,
-//             height: double.infinity,
-//             // width: double.minPositive,
-//             alignment: Alignment.center,
-//             child: AutoSizeText(
-//               '${agentsForThisDate[index].sales}',
-//               style: theme.textTheme.bodyText1,
-//               textAlign: TextAlign.center,
-//               minFontSize: 3,
-//             ),
-//           ),
-//         ),
-//       ),
-//       // Expanded(child: Container()),
-//       // SizedBox(
-//       //   width: spacing,
-//       // ),
-//       Expanded(
-//         child: Container(
-//           padding: EdgeInsets.symmetric(horizontal: 5),
-//           child: Container(
-//             color: Colors.blue,
-//             height: double.infinity,
-//             // width: double.minPositive,
-//             alignment: Alignment.center,
-//             child: AutoSizeText(
-//               '${agentsForThisDate[index].leads}',
-//               style: theme.textTheme.bodyText1,
-//               textAlign: TextAlign.center,
-//               minFontSize: 3,
-//             ),
-//           ),
-//         ),
-//       ),
-//     ]),
-//   );
-// }
-
-// Widget _createEmptyDataRow(ThemeData theme) {
-//   return Expanded(
-//     child: Row(children: [
-//       Expanded(
-//         child: AutoSizeText(
-//           '-',
-//           style: theme.textTheme.bodyText1,
-//           textAlign: TextAlign.center,
-//           minFontSize: 3,
-//         ),
-//       ),
-//       Expanded(
-//         child: Container(
-//           padding: EdgeInsets.symmetric(horizontal: 5),
-//           child: Container(
-//             color: Colors.blue[800],
-//             height: double.infinity,
-//             // width: double.minPositive,
-//             alignment: Alignment.center,
-//             child: AutoSizeText(
-//               '-',
-//               style: theme.textTheme.bodyText1,
-//               textAlign: TextAlign.center,
-//               minFontSize: 3,
-//             ),
-//           ),
-//         ),
-//       ),
-//       Expanded(
-//         child: Container(
-//           padding: EdgeInsets.symmetric(horizontal: 5),
-//           child: Container(
-//             color: Colors.blue,
-//             height: double.infinity,
-//             // width: double.minPositive,
-//             alignment: Alignment.center,
-//             child: AutoSizeText(
-//               '-',
-//               style: theme.textTheme.bodyText1,
-//               textAlign: TextAlign.center,
-//               minFontSize: 3,
-//             ),
-//           ),
-//         ),
-//       ),
-//       Expanded(
-//         child: Container(
-//           padding: EdgeInsets.symmetric(horizontal: 5),
-//           child: Container(
-//             color: Colors.blue,
-//             height: double.infinity,
-//             // width: double.minPositive,
-//             alignment: Alignment.center,
-//             child: AutoSizeText(
-//               '-',
-//               style: theme.textTheme.bodyText1,
-//               textAlign: TextAlign.center,
-//               minFontSize: 3,
-//             ),
-//           ),
-//         ),
-//       ),
-//     ]),
-//   );
-// }

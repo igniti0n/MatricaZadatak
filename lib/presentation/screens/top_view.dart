@@ -13,7 +13,7 @@ class TopView extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(8.0, 4.0, 0, 4),
       child: DataProvider(
         isUpper: true,
-        isOnly: true,
+        isOnly: false,
       ),
     );
   }

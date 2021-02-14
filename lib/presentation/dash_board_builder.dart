@@ -46,17 +46,23 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
   }
 
   void _onForward() {
-    date.increaseStartDate();
-    print("FORWARDS");
-    BlocProvider.of<DataBloc>(context, listen: false)
-        .add(LoadData(date: date.getDate));
+    if (!(BlocProvider.of<DataBloc>(context, listen: false).state
+        is DataLoading)) {
+      date.increaseStartDate();
+      BlocProvider.of<DataBloc>(context, listen: false)
+          .add(LoadData(date: date.getDate));
+    }
   }
 
   void _onBackwards() {
     date.decreaseStartDate();
-    print("BACKWARDS");
-    BlocProvider.of<DataBloc>(context, listen: false)
-        .add(LoadData(date: date.getDate));
+
+    if (!(BlocProvider.of<DataBloc>(context, listen: false).state
+        is DataLoading)) {
+      date.decreaseStartDate();
+      BlocProvider.of<DataBloc>(context, listen: false)
+          .add(LoadData(date: date.getDate));
+    }
   }
 
   void navigate(NavigatorCubit _navigatorCubit, String route, int index) {

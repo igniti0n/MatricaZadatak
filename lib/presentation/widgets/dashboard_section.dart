@@ -145,9 +145,9 @@ class DashBoardSection extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    flex: isOnly ? 9 : 10,
+                    flex: isOnly ? 9 : 12,
                     child: DataTableWidget(
-                      isOnly: true,
+                      isOnly: isOnly,
                       displayNames: true,
                       textGroup: _textSizeGroup,
                       allAgentNamesInOrder: _allAgentNames,
@@ -169,6 +169,7 @@ class DashBoardSection extends StatelessWidget {
                       allAgentNamesInOrder: _allAgentNames,
                       headlineGroup: _headlineGroup,
                       isUpper: isUpper,
+                      isOnly: isOnly,
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
                               agent.date.day ==
@@ -187,6 +188,7 @@ class DashBoardSection extends StatelessWidget {
                       allAgentNamesInOrder: _allAgentNames,
                       headlineGroup: _headlineGroup,
                       isUpper: isUpper,
+                      isOnly: isOnly,
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
                               agent.date.day ==
@@ -205,6 +207,7 @@ class DashBoardSection extends StatelessWidget {
                       allAgentNamesInOrder: _allAgentNames,
                       headlineGroup: _headlineGroup,
                       isUpper: isUpper,
+                      isOnly: isOnly,
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
                               agent.date.day ==
@@ -223,6 +226,7 @@ class DashBoardSection extends StatelessWidget {
                       allAgentNamesInOrder: _allAgentNames,
                       headlineGroup: _headlineGroup,
                       isUpper: isUpper,
+                      isOnly: isOnly,
                       agentsForThisDate: agentsToBeDisplayed
                           .where((agent) =>
                               agent.date.day ==
@@ -241,6 +245,7 @@ class DashBoardSection extends StatelessWidget {
                       allAgentNamesInOrder: _allAgentNames,
                       headlineGroup: _headlineGroup,
                       isUpper: isUpper,
+                      isOnly: isOnly,
                       agentsForThisDate: isUpper
                           ? Provider.of<List<Agent>>(context, listen: false)
                           : agentsToBeDisplayed
