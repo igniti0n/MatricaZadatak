@@ -69,14 +69,6 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
     _tabController.animateTo(index);
 
     _navigatorCubit.goToReplace(route);
-
-    // if (route == fullViewRoute) {
-    //   FocusScope.of(context).requestFocus(fullFocusNode);
-    // } else if (route == singleViewRoute) {
-    //   FocusScope.of(context).requestFocus(ccFocusNode);
-    // } else {
-    //   FocusScope.of(context).requestFocus(singleFocusNode);
-    // }
   }
 
   @override
@@ -180,7 +172,7 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
           ),
         ],
       ),
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.greenAccent[100],
       body: FocusScope(
         canRequestFocus: false,
         autofocus: true,

@@ -77,7 +77,7 @@ class DashBoardSection extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
-                          .copyWith(color: Colors.grey),
+                          .copyWith(color: Colors.grey, fontSize: 20),
                       textAlign: TextAlign.center,
                       minFontSize: 3,
                     ),
@@ -89,7 +89,7 @@ class DashBoardSection extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
-                          .copyWith(color: Colors.grey),
+                          .copyWith(color: Colors.grey, fontSize: 20),
                       textAlign: TextAlign.center,
                       minFontSize: 3,
                     ),
@@ -101,7 +101,7 @@ class DashBoardSection extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
-                          .copyWith(color: Colors.grey),
+                          .copyWith(color: Colors.grey, fontSize: 20),
                       textAlign: TextAlign.center,
                       minFontSize: 3,
                     ),
@@ -113,7 +113,7 @@ class DashBoardSection extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
-                          .copyWith(color: Colors.grey),
+                          .copyWith(color: Colors.grey, fontSize: 20),
                       textAlign: TextAlign.center,
                       minFontSize: 3,
                     ),
@@ -125,7 +125,7 @@ class DashBoardSection extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
-                          .copyWith(color: Colors.grey),
+                          .copyWith(color: Colors.grey, fontSize: 20),
                       textAlign: TextAlign.center,
                       minFontSize: 3,
                     ),
@@ -140,7 +140,7 @@ class DashBoardSection extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
-                          .copyWith(color: Colors.grey),
+                          .copyWith(color: Colors.grey, fontSize: 20),
                       minFontSize: 3,
                     ),
                   ),

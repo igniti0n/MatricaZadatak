@@ -60,14 +60,14 @@ class SingleSection extends StatelessWidget {
                 'SASTANCI I PRODAJE PO AGENTU CC',
                 minFontSize: 3,
                 textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
               ),
             ),
             Flexible(
-                flex: 1,
+                flex: 4,
                 child: Row(
                   children: [
                     Expanded(
@@ -78,7 +78,7 @@ class SingleSection extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1
-                              .copyWith(color: Colors.grey),
+                              .copyWith(color: Colors.grey, fontSize: 35),
                           textAlign: TextAlign.center,
                           minFontSize: 3,
                         ),
@@ -91,7 +91,7 @@ class SingleSection extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1
-                            .copyWith(color: Colors.grey),
+                            .copyWith(color: Colors.grey, fontSize: 35),
                         minFontSize: 3,
                       ),
                     ),
@@ -138,6 +138,7 @@ class SingleSection extends StatelessWidget {
                     flex: 4,
                     child: DataTableWidget(
                         textGroup: _textSizeGroup,
+                        isOnly: true,
                         allAgentNamesInOrder: _allAgentNames,
                         headlineGroup: _headlineGroup,
                         agentsForThisDate:

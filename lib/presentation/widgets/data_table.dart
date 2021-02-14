@@ -60,7 +60,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
 
     final TextStyle _numberStyle = theme.textTheme.bodyText1.copyWith(
       fontWeight: FontWeight.w900,
-      fontSize: 28,
+      fontSize: widget.isOnly ? 70 : 50,
     );
 
     return Expanded(
@@ -188,6 +188,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
           ),
         ),
       if (widget.displayNames) Spacer(),
+      if (widget.isOnly && !widget.displayNames) Spacer(),
       Expanded(
         child: Padding(
           padding: widget.isOnly
@@ -203,6 +204,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
           ),
         ),
       ),
+      if (widget.isOnly && !widget.displayNames) Spacer(),
       Expanded(
         child: Padding(
           padding: widget.isOnly
@@ -218,6 +220,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
           ),
         ),
       ),
+      if (widget.isOnly && !widget.displayNames) Spacer(),
       Expanded(
         child: Padding(
           padding: widget.isOnly
@@ -233,6 +236,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
           ),
         ),
       ),
+      if (widget.isOnly && !widget.displayNames) Spacer(),
     ]);
 
     final int _rowDataLimit = widget.isUpper ? 10 : 8;
