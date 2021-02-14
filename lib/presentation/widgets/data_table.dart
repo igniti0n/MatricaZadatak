@@ -57,6 +57,12 @@ class _DataTableWidgetState extends State<DataTableWidget>
       {bool isFinal = false, String agentName = ""}) {
     final flex1 = widget.isOnly ? 6 : 2;
     final flex2 = widget.isOnly ? 4 : 1;
+
+    final TextStyle _numberStyle = theme.textTheme.bodyText1.copyWith(
+      fontWeight: FontWeight.w900,
+      fontSize: 28,
+    );
+
     return Expanded(
       child: Row(
         children: [
@@ -76,12 +82,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
                   ),
                   child: AutoSizeText(
                     isFinal ? "UKUPNO" : agentName,
-                    style: isFinal
-                        ? theme.textTheme.bodyText1.copyWith(
-                            fontWeight: FontWeight.w900,
-                            // decoration: TextDecoration.underline,
-                          )
-                        : theme.textTheme.bodyText1,
+                    style: _numberStyle,
                     group: widget.textGroup,
                     textAlign: TextAlign.left,
                     minFontSize: 1,
@@ -106,10 +107,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
                 alignment: Alignment.center,
                 child: AutoSizeText(
                   text[1],
-                  style: theme.textTheme.bodyText1.copyWith(
-                      decoration: isFinal
-                          ? TextDecoration.underline
-                          : TextDecoration.none),
+                  style: _numberStyle,
                   textAlign: TextAlign.center,
                   minFontSize: 1,
                   maxLines: 1,
@@ -133,10 +131,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
                 alignment: Alignment.center,
                 child: AutoSizeText(
                   text[2],
-                  style: theme.textTheme.bodyText1.copyWith(
-                      decoration: isFinal
-                          ? TextDecoration.underline
-                          : TextDecoration.none),
+                  style: _numberStyle,
                   textAlign: TextAlign.center,
                   minFontSize: 1,
                   maxLines: 1,
@@ -160,10 +155,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
                 alignment: Alignment.center,
                 child: AutoSizeText(
                   text[3],
-                  style: theme.textTheme.bodyText1.copyWith(
-                      decoration: isFinal
-                          ? TextDecoration.underline
-                          : TextDecoration.none),
+                  style: _numberStyle,
                   textAlign: TextAlign.center,
                   minFontSize: 1,
                   maxLines: 1,
@@ -181,7 +173,7 @@ class _DataTableWidgetState extends State<DataTableWidget>
     final ThemeData _theme = Theme.of(context);
 
     final TextStyle _headlineStyle = _theme.textTheme.bodyText1.copyWith(
-        fontWeight: FontWeight.bold, color: Colors.black, fontSize: 24);
+        fontWeight: FontWeight.bold, color: Colors.black, fontSize: 34);
 
     final Widget _headlineText = Row(children: [
       if (widget.displayNames)
@@ -199,10 +191,10 @@ class _DataTableWidgetState extends State<DataTableWidget>
       Expanded(
         child: Padding(
           padding: widget.isOnly
-              ? EdgeInsets.symmetric(horizontal: 8)
+              ? EdgeInsets.symmetric(horizontal: 2)
               : EdgeInsets.symmetric(horizontal: 0),
           child: AutoSizeText(
-            'Sastanci',
+            'Sast.',
             style: _headlineStyle,
             maxLines: 1,
             group: widget.headlineGroup,
@@ -214,10 +206,10 @@ class _DataTableWidgetState extends State<DataTableWidget>
       Expanded(
         child: Padding(
           padding: widget.isOnly
-              ? EdgeInsets.symmetric(horizontal: 8)
+              ? EdgeInsets.symmetric(horizontal: 2)
               : EdgeInsets.symmetric(horizontal: 0),
           child: AutoSizeText(
-            'Prodaja',
+            'Prod.',
             style: _headlineStyle,
             group: widget.headlineGroup,
             textAlign: TextAlign.left,
@@ -229,10 +221,10 @@ class _DataTableWidgetState extends State<DataTableWidget>
       Expanded(
         child: Padding(
           padding: widget.isOnly
-              ? EdgeInsets.symmetric(horizontal: 8)
+              ? EdgeInsets.symmetric(horizontal: 2)
               : EdgeInsets.symmetric(horizontal: 0),
           child: AutoSizeText(
-            'Lead-ovi',
+            'Leads',
             style: _headlineStyle,
             maxLines: 1,
             group: widget.headlineGroup,

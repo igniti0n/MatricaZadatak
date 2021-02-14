@@ -67,7 +67,11 @@ class DashBoardSection extends StatelessWidget {
               flex: 1,
               child: Row(
                 children: [
+                  Spacer(
+                    flex: 1,
+                  ),
                   Expanded(
+                    flex: 2,
                     child: AutoSizeText(
                       'PONEDJELJAK ${DateFormat('d.M.y').format(startDate)}',
                       style: Theme.of(context)
@@ -79,6 +83,7 @@ class DashBoardSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: AutoSizeText(
                       'UTORAK ${DateFormat('d.M.y').format(startDate.add(Duration(days: 1)))}',
                       style: Theme.of(context)
@@ -90,6 +95,7 @@ class DashBoardSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: AutoSizeText(
                       'SRIJEDA ${DateFormat('d.M.y').format(startDate.add(Duration(days: 2)))}',
                       style: Theme.of(context)
@@ -101,6 +107,7 @@ class DashBoardSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: AutoSizeText(
                       'ČETVRTAK ${DateFormat('d.M.y').format(startDate.add(Duration(days: 3)))}',
                       style: Theme.of(context)
@@ -112,6 +119,7 @@ class DashBoardSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: AutoSizeText(
                       'PETAK ${DateFormat('d.M.y').format(startDate.add(Duration(days: 4)))}',
                       style: Theme.of(context)
@@ -123,6 +131,7 @@ class DashBoardSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: AutoSizeText(
                       isUpper
                           ? 'UKUPNO'
@@ -145,7 +154,7 @@ class DashBoardSection extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    flex: isOnly ? 9 : 12,
+                    flex: isOnly ? 9 : 10,
                     child: DataTableWidget(
                       isOnly: isOnly,
                       displayNames: true,
