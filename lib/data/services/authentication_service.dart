@@ -21,10 +21,11 @@ class AuthenticationService {
         },
       );
       log(_response.body);
+      log(_response.statusCode.toString());
       await SharedPreferencesService.saveToken(
           json.decode(_response.body)['Token']);
 
-      final String _token = await SharedPreferencesService.getToken();
+      // final String _token = await SharedPreferencesService.getToken();
     } catch (error) {
       print(error.toString());
       throw error;

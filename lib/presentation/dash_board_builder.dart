@@ -1,13 +1,14 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:MatricaZadatak/instance_creator.dart';
 import 'package:MatricaZadatak/logic/cubit/navigator_cubit.dart';
 import 'package:MatricaZadatak/logic/data_bloc/data_bloc.dart';
-import 'package:MatricaZadatak/presentation/widgets/dpad.dart';
 import 'package:MatricaZadatak/routing/route_generator.dart';
 import 'package:MatricaZadatak/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:async/async.dart';
 
 import '../constants.dart';
 import '../logic/date_provider.dart';
@@ -27,10 +28,9 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
   DateNotifier date;
   TabController _tabController;
   FocusNode left = new FocusNode();
-  FocusNode middle = new FocusNode();
-  FocusNode right = new FocusNode();
-  FocusNode back = new FocusNode();
-  FocusNode forward = new FocusNode();
+
+  RestartableTimer _refreshTimer;
+
   @override
   void initState() {
     super.initState();
@@ -43,6 +43,13 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
     date = new DateNotifier(currDate);
     BlocProvider.of<DataBloc>(context, listen: false)
         .add(LoadData(date: currDate));
+
+    ///RESET SVAKE MINUTE
+    _refreshTimer = new RestartableTimer(Duration(minutes: 1), () {
+      BlocProvider.of<DataBloc>(context, listen: false)
+          .add(LoadData(date: currDate));
+      _refreshTimer.reset();
+    });
   }
 
   void _onForward() {
@@ -74,6 +81,7 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
   @override
   void dispose() {
     date.dispose();
+    _refreshTimer.cancel();
     super.dispose();
   }
 

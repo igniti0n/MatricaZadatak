@@ -29,9 +29,9 @@ class DataProviderService {
         },
       );
 
-      // log(isUpper
-      //     ? "UPPER DATA RESPONSE: ${_response.body}"
-      //     : "LOWER DATA RESPONSE: ${_response.body}");
+      log(isUpper
+          ? "UPPER DATA RESPONSE: ${_response.body}"
+          : "LOWER DATA RESPONSE: ${_response.body}");
 
       print(_response.statusCode);
 
