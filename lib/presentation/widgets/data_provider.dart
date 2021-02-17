@@ -68,6 +68,21 @@ class DataProvider extends StatelessWidget {
         _sumeAgenata.update(
             agent.name,
             (value) => {
+                  'agreedAppointments': 0,
+                  'sales': 0,
+                  'leads': 0,
+                },
+            ifAbsent: () => {
+                  'agreedAppointments': agent.agreedAppointments,
+                  'sales': agent.sales,
+                  'leads': agent.leads,
+                });
+      });
+
+      agentsList.forEach((Agent agent) {
+        _sumeAgenata.update(
+            agent.name,
+            (value) => {
                   'agreedAppointments':
                       value['agreedAppointments'] + agent.agreedAppointments,
                   'sales': value['sales'] + agent.sales,

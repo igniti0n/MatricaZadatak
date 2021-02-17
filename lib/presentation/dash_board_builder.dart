@@ -62,8 +62,6 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
   }
 
   void _onBackwards() {
-    date.decreaseStartDate();
-
     if (!(BlocProvider.of<DataBloc>(context, listen: false).state
         is DataLoading)) {
       date.decreaseStartDate();
