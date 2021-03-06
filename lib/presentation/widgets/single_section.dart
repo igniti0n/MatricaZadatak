@@ -108,11 +108,14 @@ class SingleSection extends StatelessWidget {
                       buildWhen: (a, b) => a.day != b.day,
                       builder: (context, state) {
                         List<Agent> agentsToDisplay = [];
+                        print("AGENTI --.-------");
+                        int _day =
+                            startDate.add(Duration(days: state.day)).day - 1;
+
+                        if (_day == 0) _day = 1;
+
                         agentsToDisplay = agentsToBeDisplayed
-                            .where((agent) =>
-                                agent.date.day ==
-                                startDate.add(Duration(days: state.day)).day -
-                                    1)
+                            .where((agent) => agent.date.day == _day)
                             .toList();
 
                         return Expanded(

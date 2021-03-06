@@ -11,6 +11,7 @@ const String
 class AuthenticationService {
   Future<void> login() async {
     try {
+      // print("sending post...");
       final http.Response _response = await http.post(
         _authenticationLink,
         body: json
@@ -20,8 +21,8 @@ class AuthenticationService {
           'Accept': 'application/json'
         },
       );
-      log(_response.body);
-      log(_response.statusCode.toString());
+      // log(_response.body);
+      // log(_response.statusCode.toString());
       await SharedPreferencesService.saveToken(
           json.decode(_response.body)['Token']);
 

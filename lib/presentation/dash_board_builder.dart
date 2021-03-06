@@ -39,6 +39,7 @@ class _DashBoardBuilderState extends State<DashBoardBuilder>
     DateTime currDate = DateTime.now();
     while (currDate.weekday != 1) {
       currDate = currDate.subtract(Duration(days: 1));
+      print("${currDate.toString()}");
     }
     date = new DateNotifier(currDate);
     BlocProvider.of<DataBloc>(context, listen: false)

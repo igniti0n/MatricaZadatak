@@ -34,6 +34,7 @@ class _AuthenticationBuilderState extends State<AuthenticationBuilder> {
       builder: (ctx, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting ||
             snapshot.hasError) {
+          print("waiting....");
           return Scaffold(
             backgroundColor: Colors.grey[200],
             body: Center(

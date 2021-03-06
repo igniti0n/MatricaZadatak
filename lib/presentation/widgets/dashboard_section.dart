@@ -163,7 +163,9 @@ class DashBoardSection extends StatelessWidget {
                       headlineGroup: _headlineGroup,
                       isUpper: isUpper,
                       agentsForThisDate: agentsToBeDisplayed
-                          .where((agent) => agent.date.day == startDate.day - 1)
+                          .where((agent) => startDate.day - 1 == 0
+                              ? agent.date.day == 1
+                              : agent.date.day == startDate.day - 1)
                           .toList()
                             ..sort((a, b) {
                               return a.name.codeUnits.first

@@ -33,7 +33,7 @@ class DataProviderService {
           ? "UPPER DATA RESPONSE: ${_response.body}"
           : "LOWER DATA RESPONSE: ${_response.body}");
 
-      print(_response.statusCode);
+      //  print(_response.body);
 
       final List<Agent> _agents = (jsonDecode(_response.body) as List<dynamic>)
           .map((agent) => Agent.fromMap(agent))
